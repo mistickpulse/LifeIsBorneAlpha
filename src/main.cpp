@@ -10,9 +10,10 @@ int main() {
 
     try {
         Core core;
-        core.run();
+        //core.run();
     } catch (std::exception &err) {
        std::cerr << err.what() << std::endl;
+        return EXIT_FAILURE;
     }
    return EXIT_SUCCESS;
 }

@@ -11,6 +11,7 @@
 #include "GamePhases.hpp"
 #include "Manager/IntroManager.hpp"
 #include "Manager/RessourceManager/RessourceManager.hpp"
+#include "Manager/ConfigManager/ConfigManager.hpp"
 
 class Core {
 
@@ -24,6 +25,7 @@ public:
     void subrun(const sf::Time &elapsedTime);
 
 private:
+    ConfigManager _configManager;
     RessourceManager &rm;
     IntroManager intro;
     GamePhases _currentPhase;

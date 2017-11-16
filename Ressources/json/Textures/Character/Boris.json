@@ -1,0 +1,44 @@
+{
+  "Name": "Boris",
+  "BodyParts":["Hair", "Head", "Chest", "Arms", "Leggs"],
+  "StatsField":["Type", "Hp", "Mana", "Defense", "Attack"],
+  "Hair":
+  {
+    "Path":[
+      "Ressources/Textures/BodyParts/Boris/Hair/FrontHair.png",
+      "Ressources/Textures/BodyParts/Boris/Hair/FrontLeftHair.png",
+      "Ressources/Textures/BodyParts/Boris/Hair/BackHair.png",
+      "Ressources/Textures/BodyParts/Boris/Hair/BackLeftHair.png",
+      "Ressources/Textures/BodyParts/Boris/Hair/BackRightHair.png"
+    ],
+
+    "Stats":
+    {
+      "Type":"Normal",
+      "Hp":100,
+      "Mana":42,
+      "Defense":32,
+      "Attack":64
+    }
+  },
+
+  "Head": {
+    "Path":[
+      "Ressources/Textures/BodyParts/Boris/Head/FrontHead.png",
+      "Ressources/Textures/BodyParts/Boris/Head/FrontLeftHead.png",
+      "Ressources/Textures/BodyParts/Boris/Head/BackHead.png",
+      "Ressources/Textures/BodyParts/Boris/Head/BackLeftHead.png",
+      "Ressources/Textures/BodyParts/Boris/Head/BackRightHead.png"
+    ],
+
+    "Stats":
+    {
+      "Type":"Normal",
+      "Hp":100,
+      "Mana":42,
+      "Defense":32,
+      "Attack":64
+    }
+
+  }
+}
