@@ -14,7 +14,10 @@ public:
     SystemManager() = default;
     ~SystemManager() = default;
 
-    void systemRegister(ASystem &newSys);
+    void systemRegister(ASystem &newSys) {
+        _systems.emplace_back(newSys);
+    }
+
     void run(std::vector<AEntity> &ent) {
         for (auto &&i : _systems) {
            i.compute(ent);

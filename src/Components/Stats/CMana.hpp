@@ -7,11 +7,11 @@
 
 #include "../AComponent.hpp"
 
-class Mana : public AComponent {
+class CMana : public AComponent {
 public:
 
-   Mana(unsigned int max, unsigned int current):
-           AComponent(typeid(Mana).name()), max(max), current(current){}
+   CMana(unsigned int max, unsigned int current):
+           AComponent(typeid(CMana).name()), max(max), current(current){}
 private:
     unsigned int max;
     unsigned int current;

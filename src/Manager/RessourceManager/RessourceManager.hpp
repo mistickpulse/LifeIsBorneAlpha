@@ -15,8 +15,6 @@
 using SpriteBind = std::map<std::string, sf::Sprite>;
 
 namespace {
-    BETTER_ENUM(SpriteType, int, BodyPart);
-
 
     const unsigned int SpriteTypeQte = 1;
 

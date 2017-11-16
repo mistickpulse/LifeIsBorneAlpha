@@ -1,12 +1,12 @@
 cmake_minimum_required(VERSION 3.0)
 set(CMAKE_CXX_STANDARD 17)
 project(LifeIsBorne)
-set(SRC src/main.cpp src/Systems/SystemManger.cpp src/core.cpp src/Manager/IntroManager.cpp src/Manager/RessourceManager/RessourceManager.cpp src/Manager/RessourceManager/TextureHandler.cpp)
-set(HDR src/core.hpp src/Components/AComponent.hpp src/Components/Stats/Hp.hpp src/Entities/AEntity.hpp src/Components/Stats/Mana.hpp src/Components/Graphical/Animation.hpp src/Components/Collision/Hitbox.hpp src/Systems/SystemManager.hpp src/Systems/ASystem.hpp src/Systems/SystemLore.hpp src/GamePhases.hpp src/Manager/IntroManager.hpp src/Manager/RessourceManager/RessourceManager.hpp src/enum.h src/Manager/RessourceManager/TextureHandler.hpp Submodules/json/src/json.hpp src/Manager/ConfigManager/ConfigManager.hpp)
+set(SRC src/main.cpp src/Systems/SystemManger.cpp src/core.cpp src/Manager/IntroManager.cpp src/Manager/RessourceManager/RessourceManager.cpp src/Manager/RessourceManager/TextureHandler.cpp src/Manager/ConfigManager/ConfigManager.cpp src/Components/Graphical/Body/BodyPart.cpp src/Components/Graphical/Body/CBody.cpp)
+set(HDR src/core.hpp src/Components/AComponent.hpp src/Components/Stats/CHp.hpp src/Entities/AEntity.hpp src/Components/Stats/CMana.hpp src/Components/Collision/Hitbox.hpp src/Systems/SystemManager.hpp src/Systems/ASystem.hpp src/Systems/SystemLore.hpp src/GamePhases.hpp src/Manager/IntroManager.hpp src/Manager/RessourceManager/RessourceManager.hpp src/enum.h src/Manager/RessourceManager/TextureHandler.hpp Submodules/json/src/json.hpp src/Manager/ConfigManager/ConfigManager.hpp src/Components/Graphical/Body/BodyPart.hpp src/Components/Graphical/Body/BodyPart.hpp src/Components/Graphical/Body/BodyPart.hpp src/Components/Graphical/Body/BodyPart.hpp src/Components/Graphical/Body/CBody.hpp src/Components/Common/CPosition.hpp src/Utils/Position.hpp src/Utils/Size.hpp src/Components/Stats/COrientation.hpp src/Components/Stats/Orientation.hpp src/Components/Graphical/Body/BodyPartType.hpp)
 
 
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/module)
-find_package(Boost COMPONENTS regex system filesystem REQUIRED)
+find_package(Boost COMPONENTS system filesystem REQUIRED)
 find_package(SFML 2 REQUIRED system network audio graphics window)
 
 include_directories(Headers ${Boost_INCLUDE_DIRS})

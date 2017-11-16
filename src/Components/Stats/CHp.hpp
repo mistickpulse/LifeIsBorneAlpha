@@ -7,11 +7,11 @@
 
 #include "../AComponent.hpp"
 
-class Hp : public AComponent {
+class CHp : public AComponent {
 public:
-   Hp(unsigned int max, unsigned int current):
-           AComponent(typeid(Hp).name()), max(max), current(current){}
-   ~Hp() override = default;
+   CHp(unsigned int max, unsigned int current):
+           AComponent(typeid(CHp).name()), max(max), current(current){}
+   ~CHp() override = default;
 
 private:
     unsigned int max;
