@@ -14,7 +14,7 @@
 
 class CBody : public AComponent {
 public:
-    //<BodyPartType, CharacterName>
+    //pair<<BodyPartType, CharacterName>>
     CBody(const std::vector<std::pair<BodyPartType, std::string>> &BodyInformation);
     CBody() = delete;
     ~CBody() = default;

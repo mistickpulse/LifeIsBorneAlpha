@@ -14,6 +14,7 @@
 #include "../../../enum.h"
 #include "BodyPartType.hpp"
 
+using BindDirectionVSprite = std::vector<std::pair<Orientation, std::vector<sf::Sprite>>>;
 
 class BodyPart {
 public:

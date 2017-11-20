@@ -9,7 +9,7 @@
 #include <SFML/Window.hpp>
 #include "Entities/AEntity.hpp"
 #include "GamePhases.hpp"
-#include "Manager/IntroManager.hpp"
+#include "Manager/Intro/IntroManager.hpp"
 #include "Manager/RessourceManager/RessourceManager.hpp"
 #include "Manager/ConfigManager/ConfigManager.hpp"
 

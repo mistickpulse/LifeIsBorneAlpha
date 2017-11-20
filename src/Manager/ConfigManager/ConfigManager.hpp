@@ -23,6 +23,8 @@ public:
     ~ConfigManager() = default;
 
 public:
+
+    void load();
     void reload(const std::string &path = DefaultConfigPath);
 
 private:

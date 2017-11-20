@@ -9,7 +9,6 @@
 
 CBody::CBody(const std::vector<std::pair<BodyPartType, std::string>> &BodyInformation):
         AComponent(typeid(CBody).name()) {
-
     for (const auto &i : BodyInformation) {
        _addBodyPart(i.first, i.second);
     }
