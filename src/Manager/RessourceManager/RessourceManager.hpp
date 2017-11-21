@@ -27,17 +27,6 @@ namespace {
      *  "Spell::SPellType::Type(Attack/Defense)"
      */
 
-    const unsigned int SpriteTypeQte = 1;
-
-    std::array<std::string, 4> TexturesPath =
-            {{
-                     "../Ressources/intro/LifeIsBorneTitle.png",
-                     "../Ressources/Textures/BodyParts/Chest/CarapuceChest.png",
-                     "../Ressources/Textures/BodyParts/Head/CarapuceHead.png",
-                     "../Ressources/Textures/BodyParts/Hat/CarapuceHat.png",
-             }};
-
-
 }
 
 class RessourceManager {
@@ -49,14 +38,24 @@ public:
 
     ~RessourceManager() = default;
 
+
 public:
     std::vector<sf::Sprite> &getSprite(const std::string &SpriteId);
     void addRessources(const std::string &filePath, TypeLoaded type);
     void addLoadBehavior(TypeLoaded type, LoadBehavior &lb, bool replace=false);
+    void load();
 
 private:
     RessourceManager();
-   void _loadSprites();
+    void _loadBehaviors();
+    void _loadSprites();
+
+
+private://Loaders
+    void __loadCharacter(const std::string FilePath);
+
+    void __loadScenery(const std::string FilePath);
+    void __loadSpell(const std::string FilePath);
 
 private:
 

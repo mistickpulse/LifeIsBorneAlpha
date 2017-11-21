@@ -20,14 +20,16 @@ public:
     ~Core() = default;
 
 public:
-    void _init();
     void run();
     void subrun(const sf::Time &elapsedTime);
 
 private:
+    void _init();
+
+private:
     ConfigManager _configManager;
-    RessourceManager &rm;
-    IntroManager intro;
+    RessourceManager &_ressourceManager;
+    IntroManager _intro;
     GamePhases _currentPhase;
     sf::RenderWindow win;
     std::vector<AEntity> entities;

@@ -6,16 +6,8 @@
 #include "RessourceManager.hpp"
 #include "RessourceManagerException.hpp"
 
-RessourceManager::RessourceManager() {
-    for (const auto &i : TexturesPath) {
-        sf::Texture tmp;
-        tmp.loadFromFile(i);
-       _textures.insert(std::make_pair(i, std::move(tmp)));
-    }
-    _loadSprites();
-}
 
-void RessourceManager::_loadSprites() {
+RessourceManager::RessourceManager() {
 }
 
 std::vector<sf::Sprite> &RessourceManager::getSprite(const std::string &SpriteId) {
@@ -24,12 +16,12 @@ std::vector<sf::Sprite> &RessourceManager::getSprite(const std::string &SpriteId
 void RessourceManager::addLoadBehavior(TypeLoaded type, LoadBehavior &lb, bool replace) {
     //TODO
     //call the logManager for every output print
-    std::cerr << "[LoadBehavior]:Try to add a Load Behavior" << std::endl;
+    std::cerr << "[LoadBehavior]:adding [" << type._to_string() << "] Load Behavior" << std::endl;
     for (const auto &i : _loadBehavior) {
         if (i.first == type && !replace) {
-            std::string tmp("[Already Loaded Type Behavior]:[");
+            std::string tmp("[Error]:[");
             tmp += type._to_string();
-            tmp += "] Already loaded";
+            tmp += "] Already loaded\n";
             throw LoadingError(tmp);
         }
     }
@@ -45,13 +37,53 @@ void RessourceManager::addLoadBehavior(TypeLoaded type, LoadBehavior &lb, bool r
 void RessourceManager::addRessources(const std::string &filePath, TypeLoaded type) {
     //TODO same here (see the function below)
 
-    std::cerr << "[RessourcesLoading]:Try to Load Resources: " << filePath << std::endl;
+    std::cout << "  Loading [" << filePath<< "]: ";
     for (const auto &i : _loadBehavior) {
         if (type == i.first) {
             i.second(filePath);
-            std::cerr << "[RessourcesLoading]:Ressource successfully loaded:" << filePath << std::endl;
+            std::cout << "OK" << std::endl;
             return ;
         }
     }
-    std::cerr << "[RessourcesLoading]:" << "Failing to load " << filePath << " Reason:" << "Unknow Type Behavior" << std::endl;
+    std::cout << "KO:" << std::endl << "\tReason: Unknow Ressource Type load Behavior" << std::endl;
+}
+
+
+
+/*
+ *  Loaders
+ */
+
+void RessourceManager::__loadScenery(const std::string FilePath) {
+
+}
+
+void RessourceManager::__loadCharacter(const std::string FilePath) {
+
+}
+
+void RessourceManager::__loadSpell(const std::string FilePath) {
+
+}
+
+void RessourceManager::load() {
+    _loadBehaviors();
+    _loadSprites();
+}
+
+
+/*
+ * Loaders
+ */
+
+void RessourceManager::_loadBehaviors() {
+    using namespace std::placeholders;
+    std::function<void(const std::string &)> tmp = std::bind(&RessourceManager::__loadCharacter, this, _1);
+
+    addLoadBehavior(TypeLoaded::Character, tmp);
+
+}
+
+void RessourceManager::_loadSprites() {
+
 }

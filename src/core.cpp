@@ -2,10 +2,15 @@
 // Created by zouz on 14/11/17.
 //
 
-
-
 #include <boost/filesystem.hpp>
 #include "core.hpp"
+
+Core::Core(): _ressourceManager(RessourceManager::getInstance()), win(sf::VideoMode(1920, 1080), "Life is Borne")
+{
+    _init();
+}
+
+
 
 void Core::run() {
     sf::Clock clock;
@@ -23,16 +28,14 @@ void Core::run() {
 }
 
 void Core::_init() {
+    _ressourceManager.load();
+    _configManager.load();
 }
 
-Core::Core(): rm(RessourceManager::getInstance()), win(sf::VideoMode(1920, 1080), "Life is Borne")
-{
-    _init();
-}
 
 void Core::subrun(const sf::Time &elapsedTime) {
     win.clear(sf::Color::Black);
-    if (!intro.isIntroFinish()) {
+    if (!_intro.isIntroFinish()) {
         return ;
     }
     else

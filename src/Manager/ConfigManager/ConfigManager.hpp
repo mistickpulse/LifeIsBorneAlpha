@@ -28,6 +28,8 @@ public:
     void reload(const std::string &path = DefaultConfigPath);
 
 private:
+    void _subload();
+    void _computeFiles(const std::vector<std::string> &files, const std::string &TypeFile);
     void _loadAllConfigFilePaths(const std::string &path, const std::string &ext);
     void _indexFiles(const std::string &fileToIndex);
 

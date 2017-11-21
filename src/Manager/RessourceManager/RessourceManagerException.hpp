@@ -9,6 +9,26 @@
 #include <string>
 
 
+class UnknowedRessourceType : public std::exception {
+
+public:
+    UnknowedRessourceType(const std::string &RessourceName):
+    _rName(RessourceName){}
+
+    ~UnknowedRessourceType() = default;
+
+public:
+
+    const std::string what() {
+        std::string tmp("[Error]:[Loading]:Unknow Ressource Type :");
+        tmp += _rName.c_str();
+        tmp += "\n";
+        return tmp;
+    }
+
+private:
+    const std::string _rName;
+};
 
 class LoadingError : public std::exception {
 public:
