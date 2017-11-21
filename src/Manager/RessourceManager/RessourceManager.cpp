@@ -55,7 +55,6 @@ void RessourceManager::addRessources(const std::string &filePath, TypeLoaded typ
 
 void RessourceManager::load() {
     _loadBehaviors();
-    _loadSprites();
 }
 
 
@@ -68,11 +67,15 @@ void RessourceManager::_loadBehaviors() {
     std::function<void(const std::string &)> tmp = std::bind(&RessourceManager::__loadCharacter, this, _1);
 
     addLoadBehavior(TypeLoaded::Character, tmp);
-
 }
 
-void RessourceManager::_loadSprites() {
+void RessourceManager::addTexture(const std::string &key, const std::string &TexturePath) {
+    sf::Texture tmp;
+    if (tmp.loadFromFile(std::string(RessourcePath + TexturePath)) == false) {
+        return;
+    }
 
+    std::cout << "  Loading Textures: " << TexturePath << std::endl;
+    _textures.insert(std::make_pair(key, std::move(tmp)));
 }
-
 

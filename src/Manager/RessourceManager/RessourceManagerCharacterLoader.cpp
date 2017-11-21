@@ -8,7 +8,7 @@
 #include "RessourceManager.hpp"
 
 
-void RessourceManager::__loadCharacter(const std::string FilePath) {
+void RessourceManager::__loadCharacter(const std::string &FilePath) {
     std::ifstream istream(FilePath);
     json CharacterData;
     if (!istream) {
@@ -18,24 +18,40 @@ void RessourceManager::__loadCharacter(const std::string FilePath) {
     istream >> CharacterData;
 
     std::cout << std::endl;
+
     //Temporary adding variable this way.
-//    std::cerr << CharacterData << std::endl;
-    std::string CharacterName = CharacterData["Name"];
-    std::cout << "CharacterName:" << CharacterName << std::endl;
+    //std::cerr << CharacterData << std::endl;
+    std::string characterName = CharacterData["Name"];
+    std::cout << "Loading " << characterName << std::endl;
     std::vector<std::string> BodyParts = CharacterData["BodyParts"];
 
     for (const auto &i : BodyParts) {
-        __loadBodyParts(CharacterData, i);
+        json bodyPartData = CharacterData[i];
+        __loadBodyParts(characterName, bodyPartData, i);
     }
 }
 
-void RessourceManager::__loadBodyParts(const json &character, const std::string &BodyPart) {
-    std::cout << "============ Loading [" << BodyPart << "] ===========" << std::endl;
-    json BodyPartObject = character[BodyPart];
-    std::vector<std::string> BodyPartTexture = BodyPartObject["Path"];
-    for (const auto &i : BodyPartTexture) {
-        std::cerr << i << std::endl;
+void RessourceManager::__loadTexturePackage(const std::string &characterName, const json &BodyPartData,
+                                            const std::string &BodyPart) {
+    json texturePackageData = BodyPartData["TexturePackage"];
+    const std::vector<std::string> BodyPartTexturePaths = texturePackageData["Paths"];
+
+    std::string Refkey("Character::");
+    Refkey += characterName;
+    Refkey += "::";
+    Refkey += BodyPart;
+    for (const auto &i : BodyPartTexturePaths) {
+        std::string key(Refkey);
+
+        key += "::" + i.substr(i.find_last_of('/') + 1, (i.find_last_of('.') - i.find_last_of('/') - 1));
+//        std::cout << "MAPKEY:[" << key << "]" << std::endl;
+
+        addTexture(key, i);
+//        std::cout << i << std::endl;
     }
-    std::cout << "============ End loading [" << BodyPart << "] ===========" << std::endl;
 }
 
+void RessourceManager::__loadBodyParts(const std::string &characterName, const json &BodyPartData,
+                                       const std::string &BodyPart) {
+    __loadTexturePackage(characterName, BodyPartData, BodyPart);
+}

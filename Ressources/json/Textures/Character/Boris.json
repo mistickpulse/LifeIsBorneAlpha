@@ -1,16 +1,27 @@
 {
   "Name": "Boris",
-  "BodyParts":["Hair", "Head", "Chest", "Arms", "Leggs"],
+  "BodyParts": [
+    "Hair",
+    "Head",
+    "Chest",
+    "Leggs",
+    "Arms"
+  ],
+  "Canvas": [
+    12,
+    20
+  ],
   "Hair": {
-    "Path":[
-      "Ressources/Textures/BodyParts/Boris/Hair/FrontHair.png",
-      "Ressources/Textures/BodyParts/Boris/Hair/FrontLeftHair.png",
-      "Ressources/Textures/BodyParts/Boris/Hair/BackHair.png",
-      "Ressources/Textures/BodyParts/Boris/Hair/BackLeftHair.png",
-      "Ressources/Textures/BodyParts/Boris/Hair/BackRightHair.png"
-    ],
-
-    "Stats":
+    "TexturePackage": {
+      "Paths": [
+        "Ressources/Textures/BodyParts/Boris/Hair/Front.png",
+        "Ressources/Textures/BodyParts/Boris/Hair/FrontLeft.png",
+        "Ressources/Textures/BodyParts/Boris/Hair/Back.png",
+        "Ressources/Textures/BodyParts/Boris/Hair/BackLeft.png",
+        "Ressources/Textures/BodyParts/Boris/Hair/BackRight.png"
+      ]
+    },
+    "StatsPackage":
     {
       "Type":"Normal",
       "Hp":100,
@@ -19,34 +30,35 @@
       "Attack":64
     }
   },
-
   "Head": {
-    "Path":[
-      "Ressources/Textures/BodyParts/Boris/Head/FrontHead.png",
-      "Ressources/Textures/BodyParts/Boris/Head/FrontLeftHead.png",
-      "Ressources/Textures/BodyParts/Boris/Head/BackHead.png",
-      "Ressources/Textures/BodyParts/Boris/Head/BackLeftHead.png",
-      "Ressources/Textures/BodyParts/Boris/Head/BackRightHead.png"
-    ],
-
-    "Stats":
-    {
-      "Type":"Normal",
-      "Hp":100,
-      "Mana":42,
-      "Defense":32,
-      "Attack":64
+    "TexturePackage": {
+      "Paths": [
+        "Ressources/Textures/BodyParts/Boris/Head/Front.png",
+        "Ressources/Textures/BodyParts/Boris/Head/FrontLeft.png",
+        "Ressources/Textures/BodyParts/Boris/Head/Back.png",
+        "Ressources/Textures/BodyParts/Boris/Head/BackLeft.png",
+        "Ressources/Textures/BodyParts/Boris/Head/BackRight.png"
+      ]
+    },
+    "StatsPackage": {
+      "Type": "Normal",
+      "Hp": 100,
+      "Mana": 42,
+      "Defense": 32,
+      "Attack": 64
     }
   },
   "Chest": {
-    "Path": [
-      "Ressources/Textures/BodyParts/Boris/Chest/FrontChest.png",
-      "Ressources/Textures/BodyParts/Boris/Chest/FrontLeftChest.png",
-      "Ressources/Textures/BodyParts/Boris/Chest/BackChest.png",
-      "Ressources/Textures/BodyParts/Boris/Chest/BackLeftChest.png",
-      "Ressources/Textures/BodyParts/Boris/Chest/BackRightChest.png"
-    ],
-    "Stats": {
+    "TexturePackage": {
+      "Paths": [
+        "Ressources/Textures/BodyParts/Boris/Chest/Front.png",
+        "Ressources/Textures/BodyParts/Boris/Chest/FrontLeft.png",
+        "Ressources/Textures/BodyParts/Boris/Chest/Back.png",
+        "Ressources/Textures/BodyParts/Boris/Chest/BackLeft.png",
+        "Ressources/Textures/BodyParts/Boris/Chest/BackRight.png"
+      ]
+    },
+    "StatsPackage": {
       "Type": "Normal",
       "Hp": 100,
       "Mana": 42,
@@ -55,14 +67,16 @@
     }
   },
   "Arms": {
-    "Path": [
-      "Ressources/Textures/BodyParts/Boris/Arms/FrontArms.png",
-      "Ressources/Textures/BodyParts/Boris/Arms/FrontLeftArms.png",
-      "Ressources/Textures/BodyParts/Boris/Arms/BackArms.png",
-      "Ressources/Textures/BodyParts/Boris/Arms/BackLeftArms.png",
-      "Ressources/Textures/BodyParts/Boris/Arms/BackRightArms.png"
-    ],
-    "Stats": {
+    "TexturePackage": {
+      "Paths": [
+        "Ressources/Textures/BodyParts/Boris/Arms/Front.png",
+        "Ressources/Textures/BodyParts/Boris/Arms/FrontLeft.png",
+        "Ressources/Textures/BodyParts/Boris/Arms/Back.png",
+        "Ressources/Textures/BodyParts/Boris/Arms/BackLeft.png",
+        "Ressources/Textures/BodyParts/Boris/Arms/BackRight.png"
+      ]
+    },
+    "StatsPackage": {
       "Type": "Normal",
       "Hp": 100,
       "Mana": 42,
@@ -71,14 +85,16 @@
     }
   },
   "Leggs": {
-    "Path": [
-      "Ressources/Textures/BodyParts/Boris/Leggs/FrontLeggs.png",
-      "Ressources/Textures/BodyParts/Boris/Leggs/FrontLeftLeggs.png",
-      "Ressources/Textures/BodyParts/Boris/Leggs/BackLeggs.png",
-      "Ressources/Textures/BodyParts/Boris/Leggs/BackLeftLeggs.png",
-      "Ressources/Textures/BodyParts/Boris/Leggs/BackRightLeggs.png"
-    ],
-    "Stats": {
+    "TexturePackage": {
+      "Paths": [
+        "Ressources/Textures/BodyParts/Boris/Leggs/Front.png",
+        "Ressources/Textures/BodyParts/Boris/Leggs/FrontLeft.png",
+        "Ressources/Textures/BodyParts/Boris/Leggs/Back.png",
+        "Ressources/Textures/BodyParts/Boris/Leggs/BackLeft.png",
+        "Ressources/Textures/BodyParts/Boris/Leggs/BackRight.png"
+      ]
+    },
+    "StatsPackage": {
       "Type": "Normal",
       "Hp": 100,
       "Mana": 42,
@@ -86,4 +102,5 @@
       "Attack": 64
     }
   }
+
 }
