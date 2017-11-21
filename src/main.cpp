@@ -15,5 +15,8 @@ int main() {
        std::cerr << err.what() << std::endl;
         return EXIT_FAILURE;
     }
+    catch (...) {
+        std::cerr << "Oh shit" << std::endl;
+    }
    return EXIT_SUCCESS;
 }

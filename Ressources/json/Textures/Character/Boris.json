@@ -1,9 +1,7 @@
 {
   "Name": "Boris",
   "BodyParts":["Hair", "Head", "Chest", "Arms", "Leggs"],
-  "StatsField":["Type", "Hp", "Mana", "Defense", "Attack"],
-  "Hair":
-  {
+  "Hair": {
     "Path":[
       "Ressources/Textures/BodyParts/Boris/Hair/FrontHair.png",
       "Ressources/Textures/BodyParts/Boris/Hair/FrontLeftHair.png",
@@ -39,6 +37,53 @@
       "Defense":32,
       "Attack":64
     }
-
+  },
+  "Chest": {
+    "Path": [
+      "Ressources/Textures/BodyParts/Boris/Chest/FrontChest.png",
+      "Ressources/Textures/BodyParts/Boris/Chest/FrontLeftChest.png",
+      "Ressources/Textures/BodyParts/Boris/Chest/BackChest.png",
+      "Ressources/Textures/BodyParts/Boris/Chest/BackLeftChest.png",
+      "Ressources/Textures/BodyParts/Boris/Chest/BackRightChest.png"
+    ],
+    "Stats": {
+      "Type": "Normal",
+      "Hp": 100,
+      "Mana": 42,
+      "Defense": 32,
+      "Attack": 64
+    }
+  },
+  "Arms": {
+    "Path": [
+      "Ressources/Textures/BodyParts/Boris/Arms/FrontArms.png",
+      "Ressources/Textures/BodyParts/Boris/Arms/FrontLeftArms.png",
+      "Ressources/Textures/BodyParts/Boris/Arms/BackArms.png",
+      "Ressources/Textures/BodyParts/Boris/Arms/BackLeftArms.png",
+      "Ressources/Textures/BodyParts/Boris/Arms/BackRightArms.png"
+    ],
+    "Stats": {
+      "Type": "Normal",
+      "Hp": 100,
+      "Mana": 42,
+      "Defense": 32,
+      "Attack": 64
+    }
+  },
+  "Leggs": {
+    "Path": [
+      "Ressources/Textures/BodyParts/Boris/Leggs/FrontLeggs.png",
+      "Ressources/Textures/BodyParts/Boris/Leggs/FrontLeftLeggs.png",
+      "Ressources/Textures/BodyParts/Boris/Leggs/BackLeggs.png",
+      "Ressources/Textures/BodyParts/Boris/Leggs/BackLeftLeggs.png",
+      "Ressources/Textures/BodyParts/Boris/Leggs/BackRightLeggs.png"
+    ],
+    "Stats": {
+      "Type": "Normal",
+      "Hp": 100,
+      "Mana": 42,
+      "Defense": 32,
+      "Attack": 64
+    }
   }
 }

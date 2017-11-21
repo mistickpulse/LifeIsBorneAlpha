@@ -8,7 +8,7 @@
 #include <SFML/System/Time.hpp>
 
 namespace {
-    sf::Time IntroTime = sf::seconds(5.0);
+    sf::Time IntroTime(sf::seconds(5.0));
 }
 
 class IntroManager {

@@ -4,7 +4,6 @@
 
 #include <sstream>
 #include "ConfigManager.hpp"
-#include "../RessourceManager/RessourceManagerException.hpp"
 #include "../RessourceManager/TypeLoaded.hpp"
 #include "../RessourceManager/RessourceManager.hpp"
 

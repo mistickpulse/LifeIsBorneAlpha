@@ -17,6 +17,8 @@ public:
     ~BodyPartFactory() = default;
 
 public:
+    void modelRegister() = default;
+
     BodyPart &getBodyPiece(BodyPartType bodyPart, const std::string &CharacterName) {
         //Fusion all parameters to get the Correct Sprite vector to build the BodyPart;
     }

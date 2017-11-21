@@ -3,6 +3,8 @@
 //
 
 #include <iostream>
+#include <fstream>
+#include "../../enum.h"
 #include "RessourceManager.hpp"
 #include "RessourceManagerException.hpp"
 
@@ -50,21 +52,6 @@ void RessourceManager::addRessources(const std::string &filePath, TypeLoaded typ
 
 
 
-/*
- *  Loaders
- */
-
-void RessourceManager::__loadScenery(const std::string FilePath) {
-
-}
-
-void RessourceManager::__loadCharacter(const std::string FilePath) {
-
-}
-
-void RessourceManager::__loadSpell(const std::string FilePath) {
-
-}
 
 void RessourceManager::load() {
     _loadBehaviors();
@@ -87,3 +74,5 @@ void RessourceManager::_loadBehaviors() {
 void RessourceManager::_loadSprites() {
 
 }
+
+
