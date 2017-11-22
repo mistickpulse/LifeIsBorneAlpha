@@ -50,13 +50,9 @@ void RessourceManager::addRessources(const std::string &filePath, TypeLoaded typ
     std::cout << "KO:" << std::endl << "\tReason: Unknow Ressource Type load Behavior" << std::endl;
 }
 
-
-
-
 void RessourceManager::load() {
     _loadBehaviors();
 }
-
 
 /*
  * Loaders

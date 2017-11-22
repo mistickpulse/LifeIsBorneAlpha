@@ -58,7 +58,6 @@ private:
     RessourceManager();
     void _loadBehaviors();
 
-
     /*
      * Loaders
      */
@@ -82,7 +81,7 @@ private:
 
     std::vector<std::pair<TypeLoaded, LoadBehavior>> _loadBehavior;
     std::map<std::string, sf::Texture> _textures;
-    std::map<std::string, std::vector<sf::Sprite>> _sprites;
+    //std::map<std::string, std::vector<sf::Sprite>> _sprites;
     std::map<std::string, Position> _canvas;
 };
 

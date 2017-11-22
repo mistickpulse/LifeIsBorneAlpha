@@ -13,6 +13,7 @@ void RessourceManager::__loadCharacter(const std::string &FilePath) {
     json CharacterData;
     if (!istream) {
         std::cerr << "Unable to open file :" << FilePath << std::endl;
+        return;
     }
 
     istream >> CharacterData;
@@ -44,10 +45,8 @@ void RessourceManager::__loadTexturePackage(const std::string &characterName, co
         std::string key(Refkey);
 
         key += "::" + i.substr(i.find_last_of('/') + 1, (i.find_last_of('.') - i.find_last_of('/') - 1));
-//        std::cout << "MAPKEY:[" << key << "]" << std::endl;
-
+        std::cout << "MapKey:[" << key << "]" << std::endl;
         addTexture(key, i);
-//        std::cout << i << std::endl;
     }
 }
 

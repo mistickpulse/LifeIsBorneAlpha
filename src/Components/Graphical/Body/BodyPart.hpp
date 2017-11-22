@@ -22,6 +22,8 @@ public:
 
     ~BodyPart() = default;
 
+    BodyPart() = delete;
+
 public:
     std::vector<sf::Sprite> &getBodySprite(Orientation bodyOrientation);
 
@@ -36,7 +38,5 @@ private:
     BodyPartType _type;
     const Size _canvas;
 };
-
-
 
 #endif //LIFEISBORNE_BODYPART_HPP
