@@ -7,8 +7,8 @@
 
 #include <SFML/Graphics/Sprite.hpp>
 #include <vector>
-#include "../../../enum.h"
-#include "../../Stats/Orientation.hpp"
+#include "../../enum.h"
+#include "../Stats/Orientation.hpp"
 
 using BindDirectionVSprite = std::vector<std::pair<Orientation, std::vector<sf::Sprite>>>;
 

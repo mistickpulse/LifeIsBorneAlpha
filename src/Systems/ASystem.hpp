@@ -5,6 +5,7 @@
 #ifndef LIFEISBORNE_ASYSTEM_HPP
 #define LIFEISBORNE_ASYSTEM_HPP
 
+#include <chrono>
 #include "../Entities/AEntity.hpp"
 #include "SystemLore.hpp"
 
@@ -15,10 +16,10 @@ public:
 
     ASystem() = delete;
 
-    ~ASystem() = default;
+    virtual ~ASystem() = default;
 
 public:
-    virtual void compute(std::vector<AEntity> &entities) = 0;
+    virtual void compute(std::vector<AEntity *> &entities, const std::chrono::milliseconds &) = 0;
 
     SystemPriority getPriority() const;
 

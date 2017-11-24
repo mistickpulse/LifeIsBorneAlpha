@@ -14,18 +14,18 @@ public:
     SystemManager() = default;
     ~SystemManager() = default;
 
-    void systemRegister(ASystem &newSys) {
+    void systemRegister(ASystem *newSys) {
         _systems.emplace_back(newSys);
     }
 
-    void run(std::vector<AEntity> &ent) {
+    void run(std::vector<AEntity *> &ent, std::chrono::milliseconds &elt) {
         for (auto &&i : _systems) {
-           i.compute(ent);
+            i->compute(ent, elt);
         }
     }
 
 private:
-    std::vector<ASystem> _systems;
+    std::vector<ASystem *> _systems;
 };
 
 #endif //LIFEISBORNE_SYSTEMMANAGER_HPP

@@ -13,6 +13,10 @@ RessourceManager::RessourceManager() {
 }
 
 std::vector<sf::Sprite> &RessourceManager::getSprite(const std::string &SpriteId) {
+    const auto &i = _sprites.find(SpriteId);
+    if (i != _sprites.end()) {
+        return _sprites[SpriteId];
+    }
 }
 
 void RessourceManager::addLoadBehavior(TypeLoaded type, LoadBehavior &lb, bool replace) {
@@ -65,13 +69,14 @@ void RessourceManager::_loadBehaviors() {
     addLoadBehavior(TypeLoaded::Character, tmp);
 }
 
-void RessourceManager::addTexture(const std::string &key, const std::string &TexturePath) {
+bool RessourceManager::addTexture(const std::string &key, const std::string &TexturePath) {
     sf::Texture tmp;
     if (tmp.loadFromFile(std::string(RessourcePath + TexturePath)) == false) {
-        return;
+        return false;
     }
 
     std::cout << "  Loading Textures: " << TexturePath << std::endl;
     _textures.insert(std::make_pair(key, std::move(tmp)));
+    return true;
 }
 

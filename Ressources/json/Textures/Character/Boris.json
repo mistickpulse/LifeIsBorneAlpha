@@ -1,11 +1,7 @@
 {
   "Name": "Boris",
   "BodyParts": [
-    "Hair",
-    "Head",
-    "Chest",
-    "Leggs",
-    "Arms"
+    "Hair"
   ],
   "Canvas": [
     12,
@@ -14,11 +10,27 @@
   "Hair": {
     "TexturePackage": {
       "Paths": [
-        "Ressources/Textures/BodyParts/Boris/Hair/Front.png",
-        "Ressources/Textures/BodyParts/Boris/Hair/FrontLeft.png",
-        "Ressources/Textures/BodyParts/Boris/Hair/Back.png",
-        "Ressources/Textures/BodyParts/Boris/Hair/BackLeft.png",
-        "Ressources/Textures/BodyParts/Boris/Hair/BackRight.png"
+        {
+          "Path": "Ressources/Textures/BodyParts/Boris/Hair/Front.png",
+          "KeyWord": "Basic",
+          "SpritesQte": 6
+        },
+        {
+          "Path": "Ressources/Textures/BodyParts/Boris/Hair/FrontLeft.png",
+          "KeyWord": "Basic"
+        },
+        {
+          "Path": "Ressources/Textures/BodyParts/Boris/Hair/Back.png",
+          "KeyWord": "Basic"
+        },
+        {
+          "Path": "Ressources/Textures/BodyParts/Boris/Hair/BackLeft.png",
+          "KeyWord": "Basic"
+        },
+        {
+          "Path": "Ressources/Textures/BodyParts/Boris/Hair/BackRight.png",
+          "KeyWord": "Basic"
+        }
       ]
     },
     "StatsPackage":

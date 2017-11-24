@@ -4,8 +4,10 @@
 
 #include <boost/filesystem.hpp>
 #include "core.hpp"
+#include "Systems/Animation/SysAnimation.hpp"
 
-Core::Core(): _ressourceManager(RessourceManager::getInstance()), win(sf::VideoMode(1920, 1080), "Life is Borne")
+Core::Core() : _ressourceManager(RessourceManager::getInstance()), BpFactory(BodyPartFactory::getInstance()),
+               win(sf::VideoMode(1920, 1080), "Life is Borne")
 {
     _init();
 }
@@ -30,6 +32,8 @@ void Core::run() {
 void Core::_init() {
     _ressourceManager.load();
     _configManager.load();
+
+    systemManager.systemRegister(new SysAnimation(win));
 }
 
 
@@ -40,6 +44,8 @@ void Core::subrun(const sf::Time &elapsedTime) {
     }
     else
     {
+        std::chrono::milliseconds tmp(elapsedTime.asMilliseconds());
+        systemManager.run(entities, tmp);
 //        win.close();
     }
 }

@@ -13,8 +13,9 @@ public:
    AEntity() = default;
     ~AEntity() = default;
 
+    AComponent *getComponent(const std::string &ComponentId);
 private:
-    std::vector<AComponent> _components;
+    std::vector<AComponent *> _components;
 };
 
 #endif //LIFEISBORNE_AENTITY_HPP

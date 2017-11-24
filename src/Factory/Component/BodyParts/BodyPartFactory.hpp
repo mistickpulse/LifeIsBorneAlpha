@@ -8,8 +8,7 @@
 #include <map>
 #include <boost/shared_ptr.hpp>
 #include <iostream>
-#include "../../../Components/Graphical/Body/CBody.hpp"
-
+#include "../../../Components/Body/CGraphicalBody.hpp"
 
 class BodyPartFactory {
 public:
@@ -19,14 +18,13 @@ public:
 
 public:
 
-    BodyPart *genBodyPart(const std::string &characterName, BodyPartType type);
+    GraphicalBodyPart *genBodyPart(const std::string &characterName, BodyPartType type);
 
-    void getModelOfType(std::vector<const BodyPart *> &toFill, BodyPartType type);
+    void getModelOfType(std::vector<const GraphicalBodyPart *> &toFill, BodyPartType type);
 
-    void modelRegister(const std::string &CharacterName, BodyPartType bodypart, BodyPart data);
+    void modelRegister(const std::string &CharacterName, BodyPartType bodypart, GraphicalBodyPart &data);
 
-    const BodyPart *getBodyModel(BodyPartType bodyPart, const std::string &CharacterName);
-
+    const GraphicalBodyPart *getBodyModel(BodyPartType bodyPart, const std::string &CharacterName);
 
 private:
     BodyPartFactory() = default;
@@ -35,8 +33,8 @@ private:
 
 private:
 
-    std::map<std::string, BodyPart *> _BodyPartModel;
-    std::map<BodyPartType, std::vector<BodyPart *>> _BodyPartModelBind;
+    std::map<std::string, GraphicalBodyPart *> _BodyPartModel;
+    std::map<BodyPartType, std::vector<GraphicalBodyPart *>> _BodyPartModelBind;
 };
 
 #endif //LIFEISBORNE_BODYPARTFACTORY_HPP

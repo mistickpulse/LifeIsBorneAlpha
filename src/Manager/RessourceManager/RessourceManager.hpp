@@ -14,6 +14,7 @@
 #include "../../enum.h"
 #include "../../../Submodules/json/src/json.hpp" // To change
 #include "../../Utils/Position.hpp"
+#include "../../Utils/Size.hpp"
 
 using LoadBehavior = std::function<void(const std::string &)>;
 using namespace nlohmann;
@@ -24,7 +25,7 @@ namespace {
     /*
      *  Format
      *  Character Sprite
-     *  "Character::CharacterName::BodyPart::Direction"
+     *  "Character::CharacterName::GraphicalBodyPart::Direction"
      *
      *  Spell
      *  "Spell::SpellType::Type(Attack/Defense)"
@@ -50,7 +51,7 @@ public:
     void addRessources(const std::string &filePath, TypeLoaded type);
     void addLoadBehavior(TypeLoaded type, LoadBehavior &lb, bool replace=false);
 
-    void addTexture(const std::string &key, const std::string &TexturePath);
+    bool addTexture(const std::string &key, const std::string &TexturePath);
     void load();
 
 
@@ -65,7 +66,11 @@ private:
 private://Character
     void __loadCharacter(const std::string &FilePath);
 
-    void __loadBodyParts(const std::string &characterName, const json &character, const std::string &BodyPart);
+
+    void __loadBodyParts(const std::string &characterName, const json &character, const std::string &BodyPart,
+                         const Size &canvas);
+
+    void __loadSprites(const std::string &PrebuildKey, const std::string &keyword, const Size &canvas, int SprQte);
 
 private://Scenery
     void __loadScenery(const std::string FilePath);
@@ -75,13 +80,14 @@ private://Spells
 
 
 private://LoaderLore
-    void __loadTexturePackage(const std::string &characterName, const json &character, const std::string &BodyPart);
+    void __loadTexturePackage(const std::string &characterName, const json &character, const std::string &BodyPart,
+                              const Size &canvas);
 
 private:
 
     std::vector<std::pair<TypeLoaded, LoadBehavior>> _loadBehavior;
     std::map<std::string, sf::Texture> _textures;
-    //std::map<std::string, std::vector<sf::Sprite>> _sprites;
+    std::map<std::string, std::vector<sf::Sprite>> _sprites;
     std::map<std::string, Position> _canvas;
 };
 

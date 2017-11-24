@@ -12,6 +12,8 @@
 #include "Manager/Intro/IntroManager.hpp"
 #include "Manager/RessourceManager/RessourceManager.hpp"
 #include "Manager/ConfigManager/ConfigManager.hpp"
+#include "Factory/Component/BodyParts/BodyPartFactory.hpp"
+#include "Systems/SystemManager.hpp"
 
 class Core {
 
@@ -29,10 +31,14 @@ private:
 private:
     ConfigManager _configManager;
     RessourceManager &_ressourceManager;
+    BodyPartFactory &BpFactory;
     IntroManager _intro;
     GamePhases _currentPhase;
     sf::RenderWindow win;
-    std::vector<AEntity> entities;
+    SystemManager systemManager;
+
+private:
+    std::vector<AEntity *> entities;
 };
 
 #endif //LIFEISBORNE_CORE_HPP
