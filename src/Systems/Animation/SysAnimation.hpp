@@ -7,6 +7,7 @@
 
 #include <unordered_map>
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <typeinfo>
 #include "../ASystem.hpp"
 #include "../../Components/Body/CGraphicalBody.hpp"
 #include "../../Components/Common/CPosition.hpp"

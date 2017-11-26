@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.10)
 set(CMAKE_CXX_STANDARD 17)
 project(LifeIsBorne)
 set(SRC src/main.cpp src/Systems/SystemManger.cpp src/core.cpp src/Manager/Intro/IntroManager.cpp src/Manager/RessourceManager/RessourceManager.cpp src/Manager/RessourceManager/TextureHandler.cpp src/Manager/ConfigManager/ConfigManager.cpp src/Components/Body/GraphicalBodyPart.cpp src/Components/Body/CGraphicalBody.cpp src/Manager/RessourceManager/RessourceManagerCharacterLoader.cpp src/Manager/RessourceManager/RessourceManagerSpellLoader.cpp src/Manager/RessourceManager/RessourceManagerSceneryLoader.cpp src/Factory/Component/BodyParts/BodyPartFactory.cpp src/Entities/AComponent.cpp src/Systems/Animation/SysAnimation.cpp)

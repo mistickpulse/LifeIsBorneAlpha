@@ -5,7 +5,7 @@
 #ifndef LIFEISBORNE_RESSOURCEMANAGEREXCEPTION_HPP
 #define LIFEISBORNE_RESSOURCEMANAGEREXCEPTION_HPP
 
-#include <bits/exception.h>
+#include <exception>
 #include <string>
 
 

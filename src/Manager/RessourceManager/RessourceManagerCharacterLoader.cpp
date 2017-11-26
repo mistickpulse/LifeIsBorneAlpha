@@ -64,7 +64,7 @@ void RessourceManager::__loadSprites(const std::string &PrebuildKey, const std::
     Position pos{0, 0};
     while (SprQte > 0) {
         sf::Sprite spr(txt);
-        spr.setTextureRect({pos.x, pos.x, canvas.width, canvas.height});
+        spr.setTextureRect({pos.x, pos.x, static_cast<int>(canvas.width), static_cast<int>(canvas.height)});
         toPush.push_back(std::move(spr));
         pos.x += canvas.width;
         --SprQte;
