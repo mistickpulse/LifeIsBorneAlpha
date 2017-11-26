@@ -12,10 +12,11 @@ BodyPartFactory &BodyPartFactory::getInstance() {
 GraphicalBodyPart *BodyPartFactory::genBodyPart(const std::string &characterName, BodyPartType type) {
     std::string key = genMapKey(type, characterName);
 
+    std::cout << "------------------------------Researching Key[" << key << "]" << std::endl;
     if (_BodyPartModel.find(key) != _BodyPartModel.end()) {
         return new GraphicalBodyPart(*_BodyPartModel[key]);
     }
-    std::cerr << "[Error]:Can't create Instance of :" << characterName << " type:" << type._to_string() << std::endl;
+    std::cout << "[Error]:Can't create Instance of :" << characterName << " type:" << type._to_string() << std::endl;
     return nullptr;
 }
 
@@ -28,6 +29,7 @@ void BodyPartFactory::getModelOfType(std::vector<const GraphicalBodyPart *> &toF
 }
 
 void BodyPartFactory::modelRegister(const std::string &characterName, BodyPartType bodyPart, GraphicalBodyPart &data) {
+    std::cout << "=============" << "Registering Model of BodyPart" << std::endl;
     GraphicalBodyPart *ptr = new GraphicalBodyPart(data);
 
     _BodyPartModel[genMapKey(bodyPart, characterName)] = ptr;
@@ -47,7 +49,7 @@ const GraphicalBodyPart *BodyPartFactory::getBodyModel(BodyPartType bodyPart, co
 
 std::string BodyPartFactory::genMapKey(BodyPartType bodyPart, const std::string &CharacterName) {
     std::string key(CharacterName);
-    key += ":";
+    key += "::";
     key += bodyPart._to_string();
     return key;
 }

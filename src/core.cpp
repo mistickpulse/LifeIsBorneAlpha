@@ -5,6 +5,7 @@
 #include <boost/filesystem.hpp>
 #include "core.hpp"
 #include "Systems/Animation/SysAnimation.hpp"
+#include "Entities/TestCharacter.hpp"
 
 Core::Core() : _ressourceManager(RessourceManager::getInstance()), BpFactory(BodyPartFactory::getInstance()),
                win(sf::VideoMode(1920, 1080), "Life is Borne")
@@ -34,6 +35,8 @@ void Core::_init() {
     _configManager.load();
 
     systemManager.systemRegister(new SysAnimation(win));
+    AEntity *ent = new TestCharacter;
+    entities.push_back(ent);
 }
 
 

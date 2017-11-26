@@ -7,10 +7,12 @@
 
 #include <SFML/Graphics/Sprite.hpp>
 #include <vector>
+#include <map>
 #include "../../enum.h"
 #include "../Stats/Orientation.hpp"
 
-using BindDirectionVSprite = std::vector<std::pair<Orientation, std::vector<sf::Sprite>>>;
+using BodyPartAnimation = std::map<Orientation, std::vector<sf::Sprite *>>;
+using BodyPartAnimationType = std::map<std::string, BodyPartAnimation>;
 
 BETTER_ENUM(BodyPartType, int,
     Hair = 0,

@@ -11,9 +11,13 @@
 class AEntity {
 public:
    AEntity() = default;
-    ~AEntity() = default;
+
+    virtual ~AEntity() = default;
 
     AComponent *getComponent(const std::string &ComponentId);
+
+    void addComponent(AComponent *cmp);
+
 private:
     std::vector<AComponent *> _components;
 };

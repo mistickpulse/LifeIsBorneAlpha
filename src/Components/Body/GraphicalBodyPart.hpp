@@ -19,7 +19,7 @@
 
 class GraphicalBodyPart {
 public:
-    GraphicalBodyPart(BindDirectionVSprite &SpriteSrc, BodyPartType type, const Size &canvasSize,
+    GraphicalBodyPart(BodyPartAnimationType &SpriteSrc, BodyPartType type, const Size &canvasSize,
                       const std::chrono::milliseconds &ADuration);
 
     ~GraphicalBodyPart() = default;
@@ -29,9 +29,11 @@ public:
 public:
     void updateAnimation(const std::chrono::milliseconds &elasped_time);
 
+    void setAnimationType(const std::string &Atype);
+
     void setSpriteRelativePosition(const Position &pos, Orientation dir);
 
-    sf::Sprite &getAnimationSprite(Orientation bodyOrientation);
+    sf::Sprite *getAnimationSprite(const std::string &AnimationType, Orientation bodyOrientation);
 
     BodyPartType getBodyType() {
         return _type;
@@ -40,11 +42,12 @@ public:
     GraphicalBodyPart &operator=(const GraphicalBodyPart &src);
 
 private:
-    std::chrono::milliseconds _AnimationDuration;
+    std::string AnimationType;
+    std::chrono::milliseconds _AnimationDuration; // change this cause there is multiple Animation Duration
     std::chrono::milliseconds _AnimationCurrentTick;
     std::chrono::milliseconds _AnimationTick;
 
-    std::vector<std::pair<Orientation, std::vector<sf::Sprite>>> &_sprites;
+    BodyPartAnimationType _sprites;
     BodyPartType _type;
     const Size _canvas;
 };

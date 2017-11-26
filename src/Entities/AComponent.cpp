@@ -13,3 +13,7 @@ AComponent *AEntity::getComponent(const std::string &ComponentId) {
     return nullptr;
 }
 
+void AEntity::addComponent(AComponent *cmp) {
+    _components.push_back(cmp);
+}
+

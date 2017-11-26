@@ -5,7 +5,9 @@
 #ifndef LIFEISBORNE_ORIENTATION_HPP
 #define LIFEISBORNE_ORIENTATION_HPP
 
-enum Orientation {
+#include "../../enum.h"
+
+BETTER_ENUM(Orientation, int,
     FRONT = 0,
     BACK,
     LEFT,
@@ -13,7 +15,7 @@ enum Orientation {
     BACK_LEFT,
     BACK_RIGHT,
     ORIENTATION_QTE
-};
+);
 
 
 #endif //LIFEISBORNE_ORIENTATION_HPP

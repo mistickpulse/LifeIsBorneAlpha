@@ -26,13 +26,17 @@ void CGraphicalBody::_deleteBodyPart(BodyPartType typeToDel) {
 }
 
 void CGraphicalBody::_addBodyPart(BodyPartType newBodyPart, const std::string &CharacterName) {
-    _bParts.push_back(BodyPartFactory::getInstance().genBodyPart(CharacterName, newBodyPart));
+    GraphicalBodyPart *bodypart = BodyPartFactory::getInstance().genBodyPart(CharacterName, newBodyPart);
+    if (bodypart == nullptr) {
+        return;
+    }
+    _bParts.push_back(bodypart);
 }
 
 sf::Sprite &CGraphicalBody::getBodySprite(BodyPartType type, Orientation direction) {
     for (auto &bodyPart : _bParts) {
         if (bodyPart->getBodyType() == type)
-            return bodyPart->getAnimationSprite(direction);
+            return *bodyPart->getAnimationSprite(direction);
     }
 }
 

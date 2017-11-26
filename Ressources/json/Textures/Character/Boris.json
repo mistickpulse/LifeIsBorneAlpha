@@ -3,35 +3,26 @@
   "BodyParts": [
     "Hair"
   ],
+  "AnimationType": [
+    "Basic"
+  ],
   "Canvas": [
     12,
     20
   ],
   "Hair": {
+    "SpriteQte": 6,
     "TexturePackage": {
-      "Paths": [
-        {
-          "Path": "Ressources/Textures/BodyParts/Boris/Hair/Front.png",
-          "KeyWord": "Basic",
-          "SpritesQte": 6
-        },
-        {
-          "Path": "Ressources/Textures/BodyParts/Boris/Hair/FrontLeft.png",
-          "KeyWord": "Basic"
-        },
-        {
-          "Path": "Ressources/Textures/BodyParts/Boris/Hair/Back.png",
-          "KeyWord": "Basic"
-        },
-        {
-          "Path": "Ressources/Textures/BodyParts/Boris/Hair/BackLeft.png",
-          "KeyWord": "Basic"
-        },
-        {
-          "Path": "Ressources/Textures/BodyParts/Boris/Hair/BackRight.png",
-          "KeyWord": "Basic"
-        }
-      ]
+      "Basic": {
+        "AnimationDuration": 3.4,
+        "Paths": [
+          "Ressources/Textures/BodyParts/Boris/Hair/Basic/Front.png",
+          "Ressources/Textures/BodyParts/Boris/Hair/Basic/FrontLeft.png",
+          "Ressources/Textures/BodyParts/Boris/Hair/Basic/Back.png",
+          "Ressources/Textures/BodyParts/Boris/Hair/Basic/BackLeft.png",
+          "Ressources/Textures/BodyParts/Boris/Hair/Basic/BackRight.png"
+        ]
+      }
     },
     "StatsPackage":
     {

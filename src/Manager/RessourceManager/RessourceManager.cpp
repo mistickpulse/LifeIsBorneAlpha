@@ -12,9 +12,8 @@
 RessourceManager::RessourceManager() {
 }
 
-std::vector<sf::Sprite> &RessourceManager::getSprite(const std::string &SpriteId) {
-    const auto &i = _sprites.find(SpriteId);
-    if (i != _sprites.end()) {
+std::vector<sf::Sprite *> &RessourceManager::getSprite(const std::string &SpriteId) {
+    if (_sprites.find(SpriteId) != _sprites.end()) {
         return _sprites[SpriteId];
     }
 }
@@ -70,13 +69,13 @@ void RessourceManager::_loadBehaviors() {
 }
 
 bool RessourceManager::addTexture(const std::string &key, const std::string &TexturePath) {
-    sf::Texture tmp;
-    if (tmp.loadFromFile(std::string(RessourcePath + TexturePath)) == false) {
+    sf::Texture *tmp = new sf::Texture;
+    if (tmp->loadFromFile(std::string(RessourcePath + TexturePath)) == false) {
         return false;
     }
 
     std::cout << "  Loading Textures: " << TexturePath << std::endl;
-    _textures.insert(std::make_pair(key, std::move(tmp)));
+    _textures.insert(std::make_pair(key, tmp));
     return true;
 }
 
