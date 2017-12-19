@@ -2,28 +2,48 @@ cmake_minimum_required(VERSION 3.8)
 set(CMAKE_CXX_STANDARD 17)
 project(LifeIsBorne)
 
+#Sources
+## Main sources
 set(SRC_CORE src/core.cpp src/main.cpp)
 set(HDR_CORE src/core.hpp)
 
-set(SRC_MANAGER)
-set(HDR_MANAGER src/Manager/InputManager/InputManager.hpp src/Manager/InputManager/AInput.hpp)
 
+## Manager Sources
+##InputManager Sources
+set(SRC_MANAGER_INPUT src/Manager/InputManager/InputManager.cpp src/Manager/InputManager/HitMaps/AControlMapping.cpp src/Manager/InputManager/HitMaps/Controller/ControllerMapping.cpp src/Manager/InputManager/HitMaps/Keyboard/KeyboardMapping.cpp src/Manager/InputManager/InputController/Controller/Controller.cpp)
+set(HDR_MANAGER_INPUT src/Manager/InputManager/InputManager.hpp src/Manager/InputManager/InputController/AInputController.hpp src/Manager/InputManager/InputControllerType.hpp src/Manager/InputManager/InputController/AInputController.cpp src/Manager/InputManager/GameInput.hpp src/Manager/InputManager/HitMaps/AControlMapping.hpp src/Manager/InputManager/HitMaps/Controller/ControllerMapping.hpp src/Manager/InputManager/HitMaps/Keyboard/KeyboardMapping.hpp src/Manager/InputManager/InputController/Controller/Controller.hpp)
+
+
+set(SRC_MANAGER ${SRC_MANAGER_INPUT})
+set(HDR_MANAGER ${HDR_MANAGER_INPUT})
+
+
+## Set all Sources to SRC & HDR variable
 set(SRC ${SRC_CORE} ${SRC_MANAGER})
 set(HDR ${HDR_CORE} ${HDR_MANAGER})
 
 
+## Setup cmake Moule paths
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/module)
+
+## Search for lib
 find_package(Boost COMPONENTS system filesystem REQUIRED)
 find_package(SFML 2 REQUIRED system network audio graphics window)
 
-include_directories(Headers ${Boost_INCLUDE_DIRS})
-add_executable(${PROJECT_NAME} ${SRC} ${HDR})
-link_directories(${Boost_LIBRARY_DIRS})
 
+##
+add_executable(${PROJECT_NAME} ${SRC} ${HDR})
+
+
+##
 if(SFML_FOUND)
   include_directories(${SFML_INCLUDE_DIR})
   target_link_libraries(${PROJECT_NAME} ${SFML_LIBRARIES})
 endif()
+
+
 if (Boost_FOUND)
+    include_directories(Headers ${Boost_INCLUDE_DIRS})
     target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES})
+    link_directories(${Boost_LIBRARY_DIRS})
 endif()
