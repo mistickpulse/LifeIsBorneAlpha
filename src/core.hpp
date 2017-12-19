@@ -7,6 +7,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
+#include "Manager/InputManager/InputManager.hpp"
 
 class Core {
 
@@ -22,6 +23,7 @@ private:
 
 private:
     sf::RenderWindow win;
+    InputManager _imanager;
 };
 
 #endif //LIFEISBORNE_CORE_HPP

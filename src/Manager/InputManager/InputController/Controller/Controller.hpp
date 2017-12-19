@@ -10,11 +10,15 @@
 
 class Controller : public AInputController {
 public:
-    Controller(ControllerMapping *hitmap);
+    Controller(ControllerMapping *hitmap, int controllerId);
 
     ~Controller() = default;
 
+public:
     void update() override;
+
+private:
+    const int controllerId;
 };
 
 #endif //LIFEISBORNE_CONTROLLER_HPP

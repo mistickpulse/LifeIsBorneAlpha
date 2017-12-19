@@ -8,23 +8,31 @@
 #include <queue>
 #include <array>
 #include "InputController/AInputController.hpp"
+#include "HitMaps/Controller/ControllerMapping.hpp"
 
 namespace {
     const unsigned int maxController = 3; // start to 0
+    const unsigned int maxSfmlController = 7;
 }
 
 class InputManager {
 public:
-    InputManager() = default;
+    InputManager();
 
-    ~InputManager() = default;
+    ~InputManager();
 
 private:
-    void _loadDefaultConfig() = default;
+    void __loadDefaultConfig();
+
+    void __loadConfigs();
+
+    ControllerMapping *__getControllerLastMapping();
 
 private:
     int controllerConnected{0};
-    std::array<AInputController, maxController> controllers;
+    int lastControllerConfigLoaded{0};
+    std::array<AInputController *, maxController> _controllers;
+    std::array<AControlMapping *, maxController> _controllerMappings;
 };
 
 #endif //LIFEISBORNE_INPUTMANAGER_HPP

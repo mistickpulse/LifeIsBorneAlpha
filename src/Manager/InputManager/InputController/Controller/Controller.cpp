@@ -4,8 +4,9 @@
 
 #include "Controller.hpp"
 
-Controller::Controller(ControllerMapping *hitmap) :
-        AInputController(hitmap) {
+
+Controller::Controller(ControllerMapping *hitmap, int controllerId) :
+        AInputController(hitmap), controllerId(controllerId) {
 
 }
 
