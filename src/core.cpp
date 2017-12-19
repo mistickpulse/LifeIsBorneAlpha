@@ -3,17 +3,17 @@
 //
 
 #include <boost/filesystem.hpp>
+#include <iostream>
 #include "core.hpp"
-#include "Systems/Animation/SysAnimation.hpp"
-#include "Entities/TestCharacter.hpp"
 
-Core::Core() : _ressourceManager(RessourceManager::getInstance()), BpFactory(BodyPartFactory::getInstance()),
-               win(sf::VideoMode(1920, 1080), "Life is Borne")
-{
-    _init();
+namespace {
+    const sf::VideoMode WindowSize{1080, 720};
+    const std::string WindowName("LifeIsBorne");
 }
 
-
+Core::Core() :
+        win(WindowSize, WindowName) {
+}
 
 void Core::run() {
     sf::Clock clock;
@@ -25,33 +25,10 @@ void Core::run() {
            if (ev.type == sf::Event::Closed)
                win.close();
         }
-        subrun(timeStamp);
         win.display();
     }
 }
 
-void Core::_init() {
-    _ressourceManager.load();
-    _configManager.load();
-
-    systemManager.systemRegister(new SysAnimation(win));
-    AEntity *ent = new TestCharacter;
-    entities.push_back(ent);
+void Core::subrun() {
 }
-
-
-void Core::subrun(const sf::Time &elapsedTime) {
-    win.clear(sf::Color::Black);
-    if (!_intro.isIntroFinish()) {
-        return ;
-    }
-    else
-    {
-        std::chrono::milliseconds tmp(elapsedTime.asMilliseconds());
-        systemManager.run(entities, tmp);
-//        win.close();
-    }
-}
-
-
 
