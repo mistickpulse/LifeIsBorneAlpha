@@ -16,7 +16,7 @@ public:
 
     InputControllerType getControllerType() const;
 
-private:
+protected:
     InputControllerType _controllerType;
 };
 

@@ -7,12 +7,12 @@
 #include "AInputController.hpp"
 
 AInputController::AInputController(AControlMapping *controllerMapping) :
-        _mapKey(controllerMapping), _controllerType(_mapKey->getControllerType()) {
+        _mapKey(controllerMapping), _controllerType(controllerMapping->getControllerType()) {
 
 }
 
 InputControllerType AInputController::getControllerType() const {
-    return Controller;
+    return InputControllerType::Controller;
 }
 
 void AInputController::changeControllerMap(AControlMapping *controllerMapping) {

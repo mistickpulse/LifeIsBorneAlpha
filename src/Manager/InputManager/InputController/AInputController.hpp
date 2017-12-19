@@ -12,7 +12,7 @@
 
 class AInputController {
 public:
-    AInputController(AControlMapping *controllerMapping);
+    explicit AInputController(AControlMapping *controllerMapping);
 
     virtual ~AInputController() = default;
 
@@ -31,9 +31,9 @@ public:
 
 
 protected:
-    std::queue<GameInput> _inputs;
-    InputControllerType _controllerType;
     AControlMapping *_mapKey;
+    InputControllerType _controllerType;
+    std::queue<GameInput> _inputs;
 };
 
 #endif //LIFEISBORNE_AINPUTCONTROLLER_HPP

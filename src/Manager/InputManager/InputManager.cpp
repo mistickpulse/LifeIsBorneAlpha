@@ -4,20 +4,30 @@
 
 
 #include <SFML/Window/Joystick.hpp>
+#include <iostream>
 #include "InputManager.hpp"
 #include "InputController/Controller/Controller.hpp"
 
 InputManager::InputManager() {
     __loadConfigs();
-    for (unsigned int i = 0; i < maxSfmlController && controllerConnected < maxController; ++i) {
+    for (unsigned int i = 0; i < maxSfmlController && _controllerConnected < maxController; ++i) {
         if (sf::Joystick::isConnected(i)) {
-            _controllers[controllerConnected] = new Controller(__getControllerLastMapping(), controllerConnected);
+            _controllers[_controllerConnected] = new Controller(
+                    static_cast<ControllerMapping *>(_controllerMappings[0]), _controllerConnected);
+            _controllerConnected += 1;
+            std::cout << "Loading controller : id[" << i << "]" << std::endl;
+            std::cout << "Controllers connected :[" << _controllerConnected << "]" << std::endl;
         }
     }
 }
 
 InputManager::~InputManager() {
-
+    for (unsigned int i = 0; i < _controllerConnected; ++i) {
+        delete _controllers[i];
+    }
+    for (unsigned int i = 0; i < maxController; ++i) {
+        delete _controllerMappings[i];
+    }
 }
 
 void InputManager::__loadDefaultConfig() {
@@ -25,16 +35,24 @@ void InputManager::__loadDefaultConfig() {
 }
 
 void InputManager::__loadConfigs() {
-    for (int i = 0; i < maxController; ++i) {
+    _controllerMappings.fill(nullptr);
+    for (unsigned int i = 0; i < maxController; ++i) {
         _controllerMappings[i] = new ControllerMapping();
     }
 }
 
 ControllerMapping *InputManager::__getControllerLastMapping() {
-    for (int i = lastControllerConfigLoaded; i < maxController; ++i) {
+    for (unsigned int i = _lastControllerConfigLoaded; i < maxController; ++i) {
         if (_controllerMappings[i]->getControllerType() == InputControllerType::Controller) {
-            lastControllerConfigLoaded += 1;
+            _lastControllerConfigLoaded += 1;
             return static_cast<ControllerMapping *>(_controllerMappings[i]);
         }
+    }
+    return nullptr;
+}
+
+void InputManager::update() {
+    for (unsigned int i = 0; i < _controllerConnected; ++i) {
+        _controllers[i]->update();
     }
 }

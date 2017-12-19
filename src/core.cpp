@@ -25,6 +25,7 @@ void Core::run() {
            if (ev.type == sf::Event::Closed)
                win.close();
         }
+        _imanager.update();
         win.display();
     }
 }

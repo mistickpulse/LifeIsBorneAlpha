@@ -21,6 +21,7 @@ public:
 
     ~InputManager();
 
+    void update();
 private:
     void __loadDefaultConfig();
 
@@ -29,8 +30,8 @@ private:
     ControllerMapping *__getControllerLastMapping();
 
 private:
-    int controllerConnected{0};
-    int lastControllerConfigLoaded{0};
+    unsigned int _controllerConnected{0};
+    unsigned int _lastControllerConfigLoaded{0};
     std::array<AInputController *, maxController> _controllers;
     std::array<AControlMapping *, maxController> _controllerMappings;
 };

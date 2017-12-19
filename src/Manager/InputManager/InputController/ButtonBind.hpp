@@ -1,0 +1,24 @@
+//
+// Created by zouz on 19/12/17.
+//
+
+#ifndef LIFEISBORNE_BUTTONBIND_HPP
+#define LIFEISBORNE_BUTTONBIND_HPP
+
+enum ButtonBind {
+    CROSS,
+    CIRCLE,
+    TRIANGLE,
+    SQUARE,
+    L1,
+    R1,
+    L2,
+    R2,
+    SHARE,
+    OPTIONS,
+    CENTRAL_BUTTON,
+    LEFT_JOYSTICK_CLIC,
+    RIGHT_JOYSTICK_CLIC
+};
+
+#endif //LIFEISBORNE_BUTTONBIND_HPP

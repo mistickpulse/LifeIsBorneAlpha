@@ -5,7 +5,7 @@
 #ifndef LIFEISBORNE_INPUTCONTROLLERTYPE_HPP
 #define LIFEISBORNE_INPUTCONTROLLERTYPE_HPP
 
-enum InputControllerType {
+enum class InputControllerType {
     Keyboard,
     Controller
 };
