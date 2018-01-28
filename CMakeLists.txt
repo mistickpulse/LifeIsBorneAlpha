@@ -24,8 +24,8 @@ set(HDR_MANAGER ${HDR_MANAGER_INPUT} ${HDR_MANAGER_RESSOURCE} src/Manager/EventM
 
 
 ## Set all Sources to SRC & HDR variable
-set(SRC ${SRC_CORE} ${SRC_MANAGER})
-set(HDR ${HDR_CORE} ${HDR_MANAGER} src/Manager/EventManager/Events/AEvent.hpp src/Manager/EventManager/Receiver.hpp src/utils/Singleton.hpp)
+set(SRC ${SRC_CORE} ${SRC_MANAGER} src/Manager/EventManager/Events/AEvent.cpp src/Manager/SceneManager/ScenesManager.cpp src/Scenes/Intro/IntroScene.cpp)
+set(HDR ${HDR_CORE} ${HDR_MANAGER} src/Manager/EventManager/Events/AEvent.hpp src/Manager/EventManager/Receiver.hpp src/utils/Singleton.hpp src/Manager/EventManager/Events/Events.hpp src/Scenes/SceneList.hpp src/Manager/SceneManager/AScene.hpp src/Scenes/Intro/IntroScene.hpp src/Scenes/Intro/TextureId.hpp)
 
 
 ## Setup cmake Moule paths

@@ -10,32 +10,113 @@
 #include <vector>
 #include <memory>
 
-template <typename Obj>
+template <typename Key, typename Obj>
 class RessourceManager
 {
-
 public:
     RessourceManager() = default;
     ~RessourceManager() = default;
 
-    std::shared_ptr<Obj> &store(const std::string &id, const Obj &&toStore)
+public:
+
+    void clear()
     {
-        std::shared_ptr<Obj> tmp(std::make_shared(toStore));
-        return _data.emplace(std::make_pair(id, std::move(tmp))).first->second;
+        _ressources.clear();
     }
 
-    const std::shared_ptr<Obj> &get(const std::string &id)
+    template <typename ... Args>
+    void add(const Key &key, Args &&... arguments)
     {
-        return _data.at(id);
+        Obj toStore(std::forward<Args>(arguments) ...);
+        _ressources.emplace({key, std::move(toStore)});
     }
 
-    std::shared_ptr<Obj> &operator[](const std::string &id)
+    Obj &get(const Key &id)
     {
-        return *_data.at(id);
+        return _ressources.at(id);
+    }
+
+    Obj &operator[](const Key &id)
+    {
+        return get(id);
     }
 
 private:
-    std::unordered_map<std::string, std::shared_ptr<Obj>> _data;
+    std::unordered_map<Key, Obj> _ressources;
 };
+
+template <typename Key>
+class RessourceManager<Key, sf::Texture>
+{
+public:
+    RessourceManager() = default;
+    ~RessourceManager() = default;
+
+public:
+
+    void clear()
+    {
+        _ressources.clear();
+    }
+
+    template <typename ... Args>
+    void add(const Key &key, Args &&... arguments)
+    {
+        sf::Texture toStore;
+        if (toStore.loadFromFile(std::forward<Args>(arguments) ...)) {
+            _ressources.insert({key, std::move(toStore)});
+        }
+    }
+
+    sf::Texture &get(Key val)
+    {
+        return _ressources.at(val);
+    }
+
+    sf::Texture &operator[](const Key &id)
+    {
+        return get(id);
+    }
+
+private:
+    std::unordered_map<Key, sf::Texture> _ressources;
+};
+
+template <typename Key>
+class RessourceManager<Key, sf::Sprite>
+{
+public:
+    RessourceManager() = default;
+    ~RessourceManager() = default;
+
+public:
+
+    void clear()
+    {
+        _ressources.clear();
+    }
+
+    template <typename ... Args>
+    void add(const Key &key, Args &&... arguments)
+    {
+        sf::Sprite toStore;
+        toStore.setTexture(std::forward<Args>(arguments) ...);
+        _ressources.insert({key, std::move(toStore)});
+    }
+
+    sf::Sprite &get(const Key &id)
+    {
+        return _ressources.at(id);
+    }
+
+    sf::Sprite &operator[](const Key &id)
+    {
+        return get(id);
+    }
+
+private:
+    std::unordered_map<Key, sf::Sprite> _ressources;
+};
+
 
 #endif //LIFEISBORNE_RESSOURCEMANAGER_HPP

@@ -12,45 +12,51 @@
 #include <memory>
 #include "../EventManager/Receiver.hpp"
 #include "../EventManager/EventManager.hpp"
+#include "../EventManager/Events/Events.hpp"
+#include "AScene.hpp"
 
-class AScene
-{
-};
-
-using Id = unsigned int;
+using Id = Scenes::SceneType;
+using StorageKey = std::string;
 
 class SceneManager : public Receiver<SceneManager>
 {
 public:
-    SceneManager()
-    {
-        EventManager &evtMgr = EventManager::getInstance();
-        evtMgr.subscribe<TestEvent>(*this);
-    }
-
-    ~SceneManager() = default;
+    SceneManager(sf::RenderWindow &win);
+    ~SceneManager();
 
 public:
-    void receive([[maybe_unused]]const TestEvent &evt)
-    {
-        std::cout << "ZOB JE RECOIt EVENT" << std::endl;
-    }
+
+    void update(sf::Time &elapsedTime);
+
+    template <typename SceneType>
+    void registerScenes(Id id, SceneType &scene);
+
+    template <typename SceneType>
+    void registerScenes(Id id, SceneType *scene);
+
+    void changeScene(Id id);
+
+
+    //Event receiver
+public:
+
+    void receive(const Evt::ChangeScene &ev);
+    void receive(const Evt::PauseGame &ev);
+
 
 private:
 
-    void registerScenes(Id id, AScene &scene)
-    {
-        _scenes.insert({id, std::make_shared<AScene>(scene)});
-    }
+    void __registerAllScenes();
 
-    void changeScene(Id id)
-    {
-        queue.push(_scenes[id]);
-    }
+    void __leaveFirstScene();
+    void __addScene(Id id);
+
+    void __popAll();
 
 private:
-    std::queue<std::shared_ptr<AScene>> queue;
-    std::unordered_map<Id, std::shared_ptr<AScene>> _scenes;
+    sf::RenderWindow &win;
+    std::queue<AScene *> _sceneQueue;
+    std::unordered_map<StorageKey, AScene *> _scenes;
 };
 
 #endif //LIFEISBORNE_SCENESMANAGER_HPP

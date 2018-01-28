@@ -12,11 +12,13 @@ namespace {
 }
 
 Core::Core() :
-    win(WindowSize, WindowName), _evtMgr(EventManager::getInstance())
+    win(WindowSize, WindowName), _evtMgr(Evt::EventManager::getInstance()), _scManager(win)
 {
+    _evtMgr.subscribe<Evt::StopGame>(*this);
 }
 
 void Core::run() {
+    _evtMgr.emit<Evt::ChangeScene>(Scenes::SceneType::Intro);
     sf::Clock clock;
     sf::Time timeStamp;
 
@@ -29,11 +31,19 @@ void Core::run() {
                win.close();
         }
 
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space)) {
-            EventManager::getInstance().emit<TestEvent>("zob");
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+            _evtMgr.emit<Evt::StopGame>();
         }
         _imanager.update();
+        _scManager.update(timeStamp);
         win.display();
     }
 }
+
+void Core::receive([[maybe_unused]]const Evt::StopGame &ev)
+{
+    std::cout << "Closing Game" << std::endl;
+    win.close();
+}
+
 

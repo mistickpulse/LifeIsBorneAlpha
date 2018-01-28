@@ -12,7 +12,8 @@
 #include "Manager/SceneManager/ScenesManager.hpp"
 #include "Manager/EventManager/EventManager.hpp"
 
-class Core {
+class Core : public Receiver<Core>
+{
 
 public:
     Core();
@@ -21,13 +22,19 @@ public:
 public:
     void run();
 
+    //Event Receivers
+public:
+    void receive(const Evt::StopGame &ev);
+
+
 private:
     sf::RenderWindow win;
-    EventManager &_evtMgr;
+    Evt::EventManager &_evtMgr;
     InputManager _imanager;
     SceneManager _scManager;
 
-    RessourceManager<sf::Texture> _Textures;
+    RessourceManager<std::string, sf::Texture> _Textures;
+    RessourceManager<std::string, sf::Sprite> _sprites;
 };
 
 #endif //LIFEISBORNE_CORE_HPP

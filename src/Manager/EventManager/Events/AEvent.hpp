@@ -7,18 +7,27 @@
 
 #include <string>
 
-class AEvent
+namespace Evt
 {
-};
 
-class TestEvent : public AEvent
-{
-public:
-    TestEvent(const std::string &id) : id(id)
+    class AEvent
     {
-    }
+    public:
+        explicit AEvent(const std::string &info) :
+            _info(info)
+        {
+        }
 
-    std::string id;
-};
+        const std::string &getInfo() const
+        {
+            return _info;
+        }
+
+    private:
+        std::string _info;
+    };
+}
+
+std::ostream &operator<<(std::ostream &stream, const Evt::AEvent &evt);
 
 #endif //LIFEISBORNE_AEVENT_HPP
