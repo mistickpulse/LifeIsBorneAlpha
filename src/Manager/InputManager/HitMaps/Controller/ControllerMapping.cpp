@@ -56,12 +56,11 @@ ControllerMapping::ControllerMapping() :
     _joysticks[JoystickPos::ARROW_PAD].y_axes.neg.input = GameInput::Down;
 }
 
-ControllerMapping::ControllerMapping(const std::string &ConfigFilePath) :
+ControllerMapping::ControllerMapping([[maybe_unused]]const std::string &ConfigFilePath) :
         AControlMapping(InputControllerType::Controller) {
 }
 
 GameInput ControllerMapping::translate(ButtonBind controllerKey) const {
-    std::cerr << "COntrollerKey:" << static_cast<int>(controllerKey) << std::endl;
     return _buttonToInput[controllerKey];
 }
 

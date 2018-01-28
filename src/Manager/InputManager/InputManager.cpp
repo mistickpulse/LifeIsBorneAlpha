@@ -8,14 +8,16 @@
 #include "InputManager.hpp"
 #include "InputController/Controller/Controller.hpp"
 
+
 InputManager::InputManager() {
     __loadConfigs();
     for (unsigned int i = 0; i < maxSfmlController && _controllerConnected < maxController; ++i) {
         if (sf::Joystick::isConnected(i)) {
             _controllers[_controllerConnected] = new Controller(
-                    static_cast<ControllerMapping *>(_controllerMappings[0]), _controllerConnected);
+                static_cast<ControllerMapping *>(_controllerMappings[_controllerConnected]), _controllerConnected);
             _controllerConnected += 1;
-            std::cout << "Loading controller : id[" << i << "]" << std::endl;
+            std::cout << "Loading controller : id[" << i << "] Button["
+                      << sf::Joystick::getButtonCount(_controllerConnected - 1) << std::endl;
             std::cout << "Controllers connected :[" << _controllerConnected << "]" << std::endl;
         }
     }
@@ -52,6 +54,7 @@ ControllerMapping *InputManager::__getControllerLastMapping() {
 }
 
 void InputManager::update() {
+    //std::cerr << "==================" << std::endl;
     for (unsigned int i = 0; i < _controllerConnected; ++i) {
         _controllers[i]->update();
     }

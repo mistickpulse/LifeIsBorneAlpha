@@ -44,3 +44,19 @@ void Controller::__handleJoystickInput(JoystickPos selectedJ) {
     }
 }
 
+unsigned int Controller::getButtonQte() const noexcept
+{
+    return _buttonQte;
+}
+
+int Controller::getControllerId() const noexcept
+{
+    return _controllerId;
+}
+
+std::ostream &operator<<(std::ostream &stream, const Controller &controller)
+{
+    stream << "[Controller:" << controller.getControllerId() << "]-> " << controller.getButtonQte() << std::endl;
+    return stream;
+}
+

@@ -32,6 +32,7 @@ private:
 private:
     unsigned int _controllerConnected{0};
     unsigned int _lastControllerConfigLoaded{0};
+private:
     std::array<AInputController *, maxController> _controllers;
     std::array<AControlMapping *, maxController> _controllerMappings;
 };

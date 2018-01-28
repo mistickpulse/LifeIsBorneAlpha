@@ -16,19 +16,14 @@ public:
 
     virtual ~AInputController() = default;
 
-
 public:
     virtual void update() = 0;
 
 public:
     InputControllerType getControllerType() const;
-
-    void changeControllerMap(AControlMapping *controllerMapping);
-
     GameInput getLastInput();
-
+    void changeControllerMap(AControlMapping *controllerMapping);
     void addInput(GameInput input);
-
 
 protected:
     AControlMapping *_mapKey;
