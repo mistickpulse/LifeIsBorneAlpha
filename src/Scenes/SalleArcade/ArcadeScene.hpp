@@ -2,25 +2,19 @@
 // Created by zouz on 28/01/18.
 //
 
-#ifndef LIFEISBORNE_INTROSCENE_HPP
-#define LIFEISBORNE_INTROSCENE_HPP
+#ifndef LIFEISBORNE_ARCADESCENE_HPP
+#define LIFEISBORNE_ARCADESCENE_HPP
 
 #include <SFML/Graphics.hpp>
 #include "../../Manager/SceneManager/AScene.hpp"
-#include "../../Manager/EventManager/EventManager.hpp"
 #include "../../Manager/EventManager/Events/Events.hpp"
 #include "../../Manager/RessourceManager/RessourceManager.hpp"
 
-namespace
-{
-    const sf::Time maxTimer = sf::seconds(3);
-}
-
-class IntroScene : public AScene
+class ArcadeScene : public AScene
 {
 public:
-    IntroScene(sf::RenderWindow &win);
-    ~IntroScene() = default;
+    explicit ArcadeScene(sf::RenderWindow &win);
+    ~ArcadeScene() = default;
 
 public:
     void enter() override;
@@ -46,4 +40,4 @@ private:
     RessourceManager<std::string, sf::Sprite> _sprite;
 };
 
-#endif //LIFEISBORNE_INTROSCENE_HPP
+#endif //LIFEISBORNE_ARCADESCENE_HPP

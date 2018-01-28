@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include "ScenesManager.hpp"
+#include "../../Scenes/SalleArcade/ArcadeScene.hpp"
 #include "../../Scenes/Intro/IntroScene.hpp"
 
 void SceneManager::receive(const Evt::ChangeScene &ev)
@@ -24,12 +25,12 @@ void SceneManager::changeScene(Id id)
 {
     __popAll();
     __addScene(id);
-    _sceneQueue.front()->enter();
 }
 
 void SceneManager::update(sf::Time &elapsedTime)
 {
     if (_sceneQueue.size()) {
+        std::cout << "Processing scene:" << _sceneQueue.front()->getName() << std::endl;
         _sceneQueue.front()->update(elapsedTime);
     }
 }
@@ -44,6 +45,7 @@ void SceneManager::__popAll()
 void SceneManager::__addScene(Id id)
 {
     _sceneQueue.push(_scenes.at(id._to_string()));
+    _sceneQueue.front()->enter();
 }
 
 void SceneManager::__leaveFirstScene()
@@ -80,6 +82,7 @@ SceneManager::~SceneManager()
 
 void SceneManager::__registerAllScenes()
 {
-    registerScenes(Scenes::SceneType::Intro, new IntroScene(win));
+    registerScenes<IntroScene>(Scenes::SceneType::Intro, new IntroScene(win));
+    registerScenes<ArcadeScene>(Scenes::SceneType::SalleArcade, new ArcadeScene(win));
 }
 

@@ -11,8 +11,8 @@ set(HDR_CORE src/core.hpp)
 
 ## Manager Sources
 ##InputManager Sources
-set(SRC_MANAGER_INPUT src/Manager/InputManager/InputManager.cpp src/Manager/InputManager/HitMaps/AControlMapping.cpp src/Manager/InputManager/HitMaps/Controller/ControllerMapping.cpp src/Manager/InputManager/HitMaps/Keyboard/KeyboardMapping.cpp src/Manager/InputManager/InputController/Controller/Controller.cpp)
-set(HDR_MANAGER_INPUT src/Manager/InputManager/InputManager.hpp src/Manager/InputManager/InputController/AInputController.hpp src/Manager/InputManager/InputControllerType.hpp src/Manager/InputManager/InputController/AInputController.cpp src/Manager/InputManager/GameInput.hpp src/Manager/InputManager/HitMaps/AControlMapping.hpp src/Manager/InputManager/HitMaps/Controller/ControllerMapping.hpp src/Manager/InputManager/HitMaps/Keyboard/KeyboardMapping.hpp src/Manager/InputManager/InputController/Controller/Controller.hpp src/Manager/InputManager/InputController/ButtonBind.hpp src/Manager/SceneManager/ScenesManager.hpp src/Manager/EventManager/EventManager.hpp)
+set(SRC_MANAGER_INPUT src/Manager/InputManager/InputManager.cpp src/Manager/InputManager/HitMaps/AControlMapping.cpp src/Manager/InputManager/HitMaps/Controller/ControllerMapping.cpp src/Manager/InputManager/HitMaps/Keyboard/KeyboardMapping.cpp src/Manager/InputManager/InputController/Controller/Controller.cpp src/Scenes/SalleArcade/ArcadeScene.cpp)
+set(HDR_MANAGER_INPUT src/Manager/InputManager/InputManager.hpp src/Manager/InputManager/InputController/AInputController.hpp src/Manager/InputManager/InputControllerType.hpp src/Manager/InputManager/InputController/AInputController.cpp src/Manager/InputManager/GameInput.hpp src/Manager/InputManager/HitMaps/AControlMapping.hpp src/Manager/InputManager/HitMaps/Controller/ControllerMapping.hpp src/Manager/InputManager/HitMaps/Keyboard/KeyboardMapping.hpp src/Manager/InputManager/InputController/Controller/Controller.hpp src/Manager/InputManager/InputController/ButtonBind.hpp src/Manager/SceneManager/ScenesManager.hpp src/Manager/EventManager/EventManager.hpp src/Scenes/SalleArcade/ArcadeScene.hpp src/Scenes/SalleArcade/TextureId.hpp)
 
 
 set(SRC_MANAGER_RESSOURCE src/Manager/RessourceManager/RessourceManager.cpp)
@@ -25,7 +25,7 @@ set(HDR_MANAGER ${HDR_MANAGER_INPUT} ${HDR_MANAGER_RESSOURCE} src/Manager/EventM
 
 ## Set all Sources to SRC & HDR variable
 set(SRC ${SRC_CORE} ${SRC_MANAGER} src/Manager/EventManager/Events/AEvent.cpp src/Manager/SceneManager/ScenesManager.cpp src/Scenes/Intro/IntroScene.cpp)
-set(HDR ${HDR_CORE} ${HDR_MANAGER} src/Manager/EventManager/Events/AEvent.hpp src/Manager/EventManager/Receiver.hpp src/utils/Singleton.hpp src/Manager/EventManager/Events/Events.hpp src/Scenes/SceneList.hpp src/Manager/SceneManager/AScene.hpp src/Scenes/Intro/IntroScene.hpp src/Scenes/Intro/TextureId.hpp)
+set(HDR ${HDR_CORE} ${HDR_MANAGER} src/Manager/EventManager/Events/AEvent.hpp src/Manager/EventManager/Receiver.hpp src/utils/Singleton.hpp src/Manager/EventManager/Events/Events.hpp src/Scenes/SceneList.hpp src/Manager/SceneManager/AScene.hpp src/Scenes/Intro/IntroScene.hpp src/Scenes/Intro/TextureId.hpp src/Scenes/ForwardScene.hpp)
 
 
 ## Setup cmake Moule paths

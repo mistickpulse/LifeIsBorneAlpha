@@ -14,6 +14,7 @@
 #include "../EventManager/EventManager.hpp"
 #include "../EventManager/Events/Events.hpp"
 #include "AScene.hpp"
+#include "../../Scenes/ForwardScene.hpp"
 
 using Id = Scenes::SceneType;
 using StorageKey = std::string;

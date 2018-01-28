@@ -6,12 +6,14 @@
 #define LIFEISBORNE_ASCENE_HPP
 
 #include <SFML/Graphics/RenderWindow.hpp>
+#include "../EventManager/Events/AEvent.hpp"
+#include "../EventManager/EventManager.hpp"
 
 class AScene
 {
 public:
     AScene(sf::RenderWindow &win, const std::string &SceneName) :
-        win(win), _name(SceneName)
+        win(win), _evtMgr(Evt::EventManager::getInstance()), _name(SceneName)
     {
     }
 
@@ -26,8 +28,14 @@ public:
     virtual void ProcessInput() = 0;
     virtual void draw() = 0;
 
+    const std::string &getName()
+    {
+        return _name;
+    }
+
 protected:
     sf::RenderWindow &win;
+    Evt::EventManager &_evtMgr;
     const std::string _name;
     bool _paused = false;
 };

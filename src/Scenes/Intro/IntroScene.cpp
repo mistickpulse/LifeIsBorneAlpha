@@ -9,12 +9,14 @@
 void IntroScene::enter()
 {
     std::cout << "entering Scene" << std::endl;
+    win.clear(sf::Color::Black);
     __load();
 }
 
 void IntroScene::leave()
 {
     __unload();
+    _timer = sf::seconds(0);
 }
 
 void IntroScene::pause()
@@ -27,7 +29,6 @@ void IntroScene::resume()
 
 void IntroScene::draw()
 {
-    std::cout << "Drawing" << std::endl;
     IntroSprites var = IntroSprites::BackGround;
     win.draw(_sprite[var._to_string()]);
 }
@@ -35,10 +36,10 @@ void IntroScene::draw()
 void IntroScene::update(sf::Time &elapsedTime)
 {
     _timer += elapsedTime;
-    if (_timer >= maxTimer) {
-        //    _evtMgr.emit<Evt::ChangeScene>(Scenes::SceneType::SalleArcade);
-    }
     draw();
+    if (_timer >= maxTimer) {
+        _evtMgr.emit<Evt::ChangeScene>(Scenes::SceneType::SalleArcade);
+    }
 }
 
 void IntroScene::ProcessInput()
@@ -46,7 +47,7 @@ void IntroScene::ProcessInput()
 }
 
 IntroScene::IntroScene(sf::RenderWindow &win) :
-    AScene(win, "Intro Scene"), _evtMgr(Evt::EventManager::getInstance())
+    AScene(win, "Intro Scene")
 {}
 
 void IntroScene::__load()
@@ -57,7 +58,6 @@ void IntroScene::__load()
 
 void IntroScene::__loadTextures()
 {
-    std::cout << "Load Textures" << std::endl;
     std::string test = "./../Ressources/ScenesTmp/Intro.png";
     IntroTexture var = IntroTexture::BackGround;
     _textures.add(var._to_string(), test);
@@ -65,7 +65,6 @@ void IntroScene::__loadTextures()
 
 void IntroScene::__loadSprites()
 {
-    std::cout << "Load Sprites" << std::endl;
     IntroSprites var = IntroSprites::BackGround;
     IntroTexture tmp = IntroTexture::BackGround;
     _sprite.add(var._to_string(), _textures[tmp._to_string()]);
