@@ -21,12 +21,6 @@ namespace Evt
         const Scenes::SceneType sceneId;
     };
 
-    struct StopGame : public AEvent
-    {
-        explicit StopGame() :
-            AEvent("Stopping Game")
-        {}
-    };
 
     struct PauseGame : public AEvent
     {

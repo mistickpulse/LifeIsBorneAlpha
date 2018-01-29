@@ -34,7 +34,6 @@ void Core::run() {
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
             _evtMgr.emit<Evt::StopGame>();
         }
-        _imanager.update();
         _scManager.update(timeStamp);
         win.display();
     }

@@ -1,18 +1,33 @@
 //
-// Created by zouz on 19/12/17.
+// Created by zouz on 28/01/18.
 //
 
-#ifndef LIFEISBORNE_GAMEINPUT_HPP
-#define LIFEISBORNE_GAMEINPUT_HPP
+#ifndef LIFEISBORNE_INPUTTYPE_HPP
+#define LIFEISBORNE_INPUTTYPE_HPP
 
-enum GameInput {
-    None,
-    Up,
-    Down,
-    Left,
-    Right,
-    Select,
-    Back
-};
+#include "../../../Lib/better-enums/enum.h"
 
-#endif //LIFEISBORNE_GAMEINPUT_HPP
+namespace Inputs
+{
+
+    BETTER_ENUM(GameInput, int,
+                NONE,
+                ACCEPT,
+                REFUSE,
+                UP,
+                DOWN,
+                LEFT,
+                RIGHT,
+
+                INTERACT,
+                ROLL,
+                STATUE,
+                SPELL1,
+                SPELL2,
+                SPELL3,
+                SPELL4,
+                FUSION
+    )
+}
+
+#endif //LIFEISBORNE_INPUTTYPE_HPP

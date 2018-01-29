@@ -17,6 +17,7 @@ int main() {
     }
     catch (...) {
         std::cerr << "Oh shit" << std::endl;
+        return EXIT_FAILURE;
     }
    return EXIT_SUCCESS;
 }

@@ -33,7 +33,7 @@ void ArcadeScene::draw()
     win.draw(_sprite[var._to_string()]);
 }
 
-void ArcadeScene::update(sf::Time &elapsedTime)
+void ArcadeScene::update([[maybe_unused]]sf::Time &elapsedTime)
 {
     draw();
 

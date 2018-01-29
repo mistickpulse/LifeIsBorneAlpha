@@ -12,7 +12,7 @@
 #include <memory>
 #include "../EventManager/Receiver.hpp"
 #include "../EventManager/EventManager.hpp"
-#include "../EventManager/Events/Events.hpp"
+#include "../EventManager/Events/SceneEvents.hpp"
 #include "AScene.hpp"
 #include "../../Scenes/ForwardScene.hpp"
 

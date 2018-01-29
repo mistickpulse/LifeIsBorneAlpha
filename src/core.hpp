@@ -11,6 +11,7 @@
 #include "Manager/RessourceManager/RessourceManager.hpp"
 #include "Manager/SceneManager/ScenesManager.hpp"
 #include "Manager/EventManager/EventManager.hpp"
+#include "Manager/EventManager/Events/MainEvent.hpp"
 
 class Core : public Receiver<Core>
 {
@@ -30,7 +31,6 @@ public:
 private:
     sf::RenderWindow win;
     Evt::EventManager &_evtMgr;
-    InputManager _imanager;
     SceneManager _scManager;
 
     RessourceManager<std::string, sf::Texture> _Textures;

@@ -5,11 +5,13 @@
 #ifndef LIFEISBORNE_SINGLETON_HPP
 #define LIFEISBORNE_SINGLETON_HPP
 
+#include "NonCopyable.hpp"
+
 template <typename T>
 class Singleton
 {
 public:
-    ~Singleton() = default;
+    virtual ~Singleton() = default;
 
     static T &getInstance()
     {
