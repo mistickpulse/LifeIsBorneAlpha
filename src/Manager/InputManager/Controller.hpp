@@ -18,7 +18,8 @@ namespace Inputs
     public:
         explicit Controller(PlayerInput *playerInput) :
             _profileName(""),
-            _playerInput(playerInput)
+            _playerInput(playerInput),
+            _mode(playerInput->mode)
         {
         }
 
@@ -60,6 +61,7 @@ namespace Inputs
     private:
         std::string _profileName{""};
         PlayerInput *_playerInput;
+        InputMode _mode;
     };
 }
 

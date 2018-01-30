@@ -11,6 +11,7 @@
 #include "../../utils/Singleton.hpp"
 #include "../EventManager/EventManager.hpp"
 #include "../EventManager/Events/InputEvents.hpp"
+#include "ControlerProfileManager.hpp"
 
 namespace Inputs
 {
@@ -75,6 +76,7 @@ namespace Inputs
 
     private:
         Evt::EventManager &_evtMgr;
+        ControlerProfilManager _pMgr;
 
         std::array<std::unique_ptr<Controller>, MaxPlayer> _inputs;
         std::array<PlayerInput, MaxPlayer> _playerBinds;

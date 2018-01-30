@@ -6,7 +6,6 @@
 #define LIFEISBORNE_FORWARDSCENE_HPP
 
 class IntroScene;
-
 class ArcadeScene;
 
 #endif //LIFEISBORNE_FORWARDSCENE_HPP

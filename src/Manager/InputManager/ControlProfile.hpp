@@ -16,6 +16,8 @@ namespace Inputs
 
     class ControlProfile
     {
+        friend class Controller;
+
     public:
         explicit ControlProfile(InputMode mode = InputMode::GAME, std::string ProfileName = "Default");
 
