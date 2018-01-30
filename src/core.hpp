@@ -7,13 +7,12 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
+#include "Manager/EventManager/EventManager.hpp"
 #include "Manager/InputManager/InputManager.hpp"
 #include "Manager/RessourceManager/RessourceManager.hpp"
 #include "Manager/SceneManager/ScenesManager.hpp"
-#include "Manager/EventManager/EventManager.hpp"
-#include "Manager/EventManager/Events/MainEvent.hpp"
 
-class Core : public Receiver<Core>
+class Core
 {
 
 public:

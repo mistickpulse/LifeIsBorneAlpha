@@ -7,7 +7,6 @@
 
 #include <SFML/Graphics.hpp>
 #include "../../Manager/SceneManager/AScene.hpp"
-#include "../../Manager/EventManager/Events/SceneEvents.hpp"
 #include "../../Manager/RessourceManager/RessourceManager.hpp"
 
 class ArcadeScene : public AScene

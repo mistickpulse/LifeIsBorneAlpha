@@ -10,19 +10,19 @@
 #include <bits/unordered_map.h>
 #include <queue>
 #include <memory>
-#include "../EventManager/Receiver.hpp"
 #include "../EventManager/EventManager.hpp"
-#include "../EventManager/Events/SceneEvents.hpp"
 #include "AScene.hpp"
 #include "../../Scenes/ForwardScene.hpp"
+#include "../../Scenes/SceneList.hpp"
+#include "../EventManager/Events/EventList.hpp"
 
 using Id = Scenes::SceneType;
 using StorageKey = std::string;
 
-class SceneManager : public Receiver<SceneManager>
+class SceneManager
 {
 public:
-    SceneManager(sf::RenderWindow &win);
+    explicit SceneManager(sf::RenderWindow &win);
     ~SceneManager();
 
 public:

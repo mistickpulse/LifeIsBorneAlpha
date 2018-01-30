@@ -29,7 +29,6 @@ void ArcadeScene::resume()
 void ArcadeScene::draw()
 {
     ArcadeSprites var = ArcadeSprites::BackGround;
-    std::cout << "Before get spr" << std::endl;
     win.draw(_sprite[var._to_string()]);
 }
 

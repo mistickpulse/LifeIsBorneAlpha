@@ -13,14 +13,25 @@ set(HDR_CORE src/core.hpp)
 set(SRC_MANAGER_INPUT src/Manager/InputManager/InputManager.cpp src/Manager/InputManager/ControlProfile.cpp src/Manager/InputManager/ControlerProfileManager.cpp)
 set(HDR_MANAGER_INPUT src/Manager/InputManager/InputManager.hpp src/Manager/InputManager/GameInput.hpp src/Manager/InputManager/Controller.hpp src/Manager/InputManager/Buttons/AButton.hpp src/Manager/InputManager/Buttons/ControllerButton.hpp src/Manager/InputManager/Buttons/KeyboardButton.hpp src/Manager/InputManager/DirectionalInput/ADIrectionalInput.hpp src/Manager/InputManager/DirectionalInput/JoystickDIrectionalInput.hpp src/Manager/InputManager/PlayerInput.hpp src/Manager/InputManager/DirectionalInput/JoystickPos.hpp src/Manager/InputManager/DirectionalInput/MouseDirectionalInput.hpp src/Manager/InputManager/DirectionalInput/GameDirectionalInput.hpp src/utils/NonCopyable.hpp src/Manager/InputManager/DirectionalInput/ControllerButtons.hpp src/Manager/InputManager/InputMode.hpp src/Manager/InputManager/ControlProfile.hpp src/Manager/InputManager/ControlerProfileManager.hpp)
 
-set(SRC_SCENE src/Scenes/SalleArcade/ArcadeScene.cpp)
+set(SRC_SCENE src/Scenes/Intro/IntroScene.cpp src/Scenes/SalleArcade/ArcadeScene.cpp src/Manager/SceneManager/ScenesManager.cpp)
 set(HDR_SCENE src/Manager/SceneManager/ScenesManager.hpp src/Scenes/SalleArcade/ArcadeScene.hpp src/Scenes/SalleArcade/TextureId.hpp)
+
+
+### Event Manager
+set(HDR_EVENT_LIST src/Manager/EventManager/Events/SceneEvents.hpp src/Manager/EventManager/Events/InputEvents.hpp src/Manager/EventManager/Events/MainEvent.hpp src/Manager/EventManager/Events/EventList.hpp)
+
+set(SRC_MANAGER_EVENT src/Manager/EventManager/Events/AEvent.cpp)
+
+set(HDR_MANAGER_EVENT src/Manager/EventManager/EventManager.hpp src/Manager/EventManager/Events/AEvent.hpp ${HDR_EVENT_LIST})
+
+### Ressource Manager
+
 
 set(SRC_MANAGER_RESSOURCE src/Manager/RessourceManager/RessourceManager.cpp)
 set(HDR_MANAGER_RESSOURCE src/Manager/RessourceManager/RessourceManager.hpp)
 
-set(SRC_MANAGER ${SRC_MANAGER_INPUT} ${SRC_MANAGER_RESSOURCE} ${SRC_SCENE})
-set(HDR_MANAGER ${HDR_MANAGER_INPUT} ${HDR_MANAGER_RESSOURCE} ${HDR_SCENE})
+set(SRC_MANAGER ${SRC_MANAGER_INPUT} ${SRC_MANAGER_RESSOURCE} ${SRC_SCENE} ${SRC_MANAGER_EVENT})
+set(HDR_MANAGER ${HDR_MANAGER_INPUT} ${HDR_MANAGER_RESSOURCE} ${HDR_SCENE} ${HDR_MANAGER_EVENT})
 
 ## Set all Sources to SRC & HDR variable
 

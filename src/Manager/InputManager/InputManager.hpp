@@ -9,9 +9,8 @@
 #include <iostream>
 #include "Controller.hpp"
 #include "../../utils/Singleton.hpp"
-#include "../EventManager/Receiver.hpp"
 #include "../EventManager/EventManager.hpp"
-#include "../EventManager/Events/EventList.hpp"
+#include "../EventManager/Events/InputEvents.hpp"
 
 namespace Inputs
 {
@@ -22,12 +21,11 @@ namespace Inputs
         constexpr uint8_t MaxController = 8;
     }
 
-    class InputManager : public Singleton<InputManager>, public Receiver<InputManager>
+    class InputManager : public Singleton<InputManager>
     {
 
     public:
-        InputManager() :
-            _evtMgr(Evt::EventManager::getInstance())
+        InputManager() : _evtMgr(Evt::EventManager::getInstance())
         {
             _evtMgr.subscribe<Evt::AddPlayer>(*this);
             _evtMgr.subscribe<Evt::RemovePlayer>(*this);

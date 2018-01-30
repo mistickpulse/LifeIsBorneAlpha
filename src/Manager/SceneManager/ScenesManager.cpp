@@ -30,7 +30,6 @@ void SceneManager::changeScene(Id id)
 void SceneManager::update(sf::Time &elapsedTime)
 {
     if (_sceneQueue.size()) {
-        std::cout << "Processing scene:" << _sceneQueue.front()->getName() << std::endl;
         _sceneQueue.front()->update(elapsedTime);
     }
 }

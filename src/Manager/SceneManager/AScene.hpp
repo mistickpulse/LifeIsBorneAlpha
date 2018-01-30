@@ -6,8 +6,8 @@
 #define LIFEISBORNE_ASCENE_HPP
 
 #include <SFML/Graphics/RenderWindow.hpp>
-#include "../EventManager/Events/AEvent.hpp"
 #include "../EventManager/EventManager.hpp"
+#include "../EventManager/Events/SceneEvents.hpp"
 
 class AScene
 {
