@@ -1,0 +1,34 @@
+{
+  "RawInputs": {
+    "RawInputController": {
+      "CROSS": "STATUE",
+      "CIRCLE": "ROLL",
+      "TRIANGLE": "FUSION",
+      "SQUARE": "INTERRACT",
+      "OPTIONS": "PAUSE"
+    },
+    "RawInputKeyboard": {
+      "S": "DOWN",
+      "W": "UP",
+      "A": "LEFT",
+      "D": "RIGHT",
+      "SPACE": "ROLL",
+      "LEFT_SHIFT": "STATUE",
+      "F": "FUSION",
+      "E": "INTERRACT",
+      "ESCAPE": "PAUSE"
+    },
+    "RawInputAxis": {
+      "LEFT_X": "BASIC_JOYSTICK_H",
+      "LEFT_Y": "BASIC_JOYSTICK_V",
+      "RIGHT_X": "VIEWER_JOYSTICK_H",
+      "RIGHT_Y": "VIEWER_JOYSTICK_V",
+      "MOUSE_X": "VIEWER_MOUSE_H",
+      "MOUSE_Y": "VIEWER_MOUSE_V"
+    },
+    "AxisSensivity": {
+      "X_AXIS": 50,
+      "Y_AXIS": 50
+    }
+  }
+}

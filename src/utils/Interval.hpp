@@ -9,9 +9,22 @@ template <typename Stockage>
 class Interval
 {
 public:
+    friend class RangeConverter;
+
+    Interval() :
+        min(0), max(0)
+    {}
+
     Interval(Stockage a, Stockage b) :
         min(a), max(b)
     {}
+
+    bool isReady()
+    {
+        if (min == max)
+            return false;
+        return true;
+    }
 
     bool test(Stockage op) const noexcept
     {

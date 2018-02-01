@@ -5,6 +5,8 @@
 #ifndef LIFEISBORNE_AEVENT_HPP
 #define LIFEISBORNE_AEVENT_HPP
 
+#include <string>
+
 namespace Evt
 {
 

@@ -1,0 +1,42 @@
+{
+  "RawInputs": {
+    "RawInputController": {
+      "CROSS": "STATUE",
+      "CIRCLE": "ROLL",
+      "TRIANGLE": "FUSION",
+      "SQUARE": "INTERRACT",
+      "R1": "SPELL1",
+      "R2": "SPELL2",
+      "L1": "SPELL3",
+      "L2": "SPELL4",
+      "OPTIONS": "PAUSE"
+    },
+    "RawInputKeyboard": {
+      "S": "DOWN",
+      "W": "UP",
+      "A": "LEFT",
+      "D": "RIGHT",
+      "NUMPAD_1": "SPELL1",
+      "NUMPAD_2": "SPELL2",
+      "NUMPAD_3": "SPELL3",
+      "NUMPAD_4": "SPELL4",
+      "SPACE": "ROLL",
+      "LEFT_SHIFT": "STATUE",
+      "F": "FUSION",
+      "E": "INTERRACT",
+      "ESCAPE": "PAUSE"
+    },
+    "RawInputAxis": {
+      "LEFT_X": "BASIC_JOYSTICK_H",
+      "LEFT_Y": "BASIC_JOYSTICK_V",
+      "RIGHT_X": "VIEWER_JOYSTICK_H",
+      "RIGHT_Y": "VIEWER_JOYSTICK_V",
+      "MOUSE_X": "VIEWER_MOUSE_H",
+      "MOUSE_Y": "VIEWER_MOUSE_V"
+    },
+    "AxisSensivity": {
+      "X_AXIS": 50,
+      "Y_AXIS": 50
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "GameActions": [
+    "DOWN",
+    "UP",
+    "LEFT",
+    "RIGHT",
+    "ROLL",
+    "STATUE",
+    "FUSION",
+    "INTERRACT"
+  ],
+  "GameStates": [
+    "FREE",
+    "UNTARGETABLE",
+    "UNCIBLABLE",
+    "INVINCIBLE",
+    "STUNED",
+    "STUCK",
+    "CONFUSED",
+    "FUSIONED",
+    "UNFUSIONED"
+  ],
+  "GameRanges": [
+    "VIEWER_MOUSE_H",
+    "VIEWER_MOUSE_V",
+    "BASIC_JOYSTICK_H",
+    "BASIC_JOYSTICK_V",
+    "VIEWER_JOYSTICK_H",
+    "VIEWER_JOYSTICK_V"
+  ]
+}

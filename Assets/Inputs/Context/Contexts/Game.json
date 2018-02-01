@@ -1,0 +1,38 @@
+{
+  "GameActions": [
+    "DOWN",
+    "UP",
+    "LEFT",
+    "RIGHT",
+    "SPELL1",
+    "SPELL2",
+    "SPELL3",
+    "SPELL4",
+    "ROLL",
+    "STATUE",
+    "FUSION",
+    "INTERRACT",
+    "PAUSE"
+  ],
+  "GameStates": [
+    "FREE",
+    "UNTARGETABLE",
+    "UNCIBLABLE",
+    "STUNED",
+    "STUCK",
+    "FOLOWING",
+    "FUSIONED",
+    "UNFUSIONED",
+    "CASTING_SPELL",
+    "INVINCIBLE",
+    "CASTING_SPELL"
+  ],
+  "GameRanges": [
+    "VIEWER_MOUSE_H",
+    "VIEWER_MOUSE_V",
+    "BASIC_JOYSTICK_H",
+    "BASIC_JOYSTICK_V",
+    "VIEWER_JOYSTICK_H",
+    "VIEWER_JOYSTICK_V"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "GameActions": [
+    "ACCEPT",
+    "REFUSE",
+    "QUIT",
+    "LEFT",
+    "RIGHT",
+    "DOWN",
+    "UP"
+  ],
+  "GameStates": [],
+  "GameRanges": [
+    "BASIC_JOYSTICK_H",
+    "BASIC_JOYSTICK_V",
+    "BASIC_MOUSE_H",
+    "BASIC_MOUSE_V"
+  ]
+}

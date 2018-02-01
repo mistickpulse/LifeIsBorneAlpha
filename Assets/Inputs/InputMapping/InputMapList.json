@@ -1,0 +1,9 @@
+{
+  "Extension": ".json",
+  "Directory": "Maps",
+  "MapsNames": [
+    "Menu",
+    "Game",
+    "RawMenu"
+  ]
+}

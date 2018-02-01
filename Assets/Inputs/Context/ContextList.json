@@ -1,0 +1,9 @@
+{
+  "Extension": ".json",
+  "Directory": "Contexts",
+  "ContextsNames": [
+    "Menu",
+    "Game",
+    "RawMenu"
+  ]
+}

@@ -6,7 +6,6 @@
 #define LIFEISBORNE_INPUTEVENTS_HPP
 
 #include "AEvent.hpp"
-#include "../../InputManager/InputMode.hpp"
 
 namespace Evt
 {
@@ -28,14 +27,7 @@ namespace Evt
         const uint8_t qte;
     };
 
-    struct ChangeControlMode : public AEvent
-    {
-        explicit ChangeControlMode(Inputs::InputMode m) :
-            AEvent("Changing Control Mode"), mode(m)
-        {}
 
-        Inputs::InputMode mode;
-    };
 }
 
 #endif //LIFEISBORNE_INPUTEVENTS_HPP

@@ -1,0 +1,24 @@
+{
+  "RawInputs": {
+    "RawInputController": {
+      "CROSS": "ACCEPT",
+      "CIRCLE": "REFUSE",
+      "OPTIONS": "QUIT"
+    },
+    "RawInputKeyboard": {
+      "S": "DOWN",
+      "W": "UP",
+      "A": "LEFT",
+      "D": "RIGHT",
+      "ESCAPE": "QUIT"
+    },
+    "RawInputAxis": {
+      "LEFT_X": "BASIC_JOYSTICK_H",
+      "LEFT_Y": "BASIC_JOYSTICK_V",
+      "MOUSE_X": "BASIC_MOUSE_H",
+      "MOUSE_Y": "BASIC_MOUSE_V",
+      "CROSS_X": "BASIC_JOYSTICK_H",
+      "CROSS_Y": "BASIC_JOYSICK_V"
+    }
+  }
+}
