@@ -76,6 +76,19 @@ namespace Inputs
                  {"FREE", GameState::FREE},
              }};
 
+        std::unordered_map<GameRange, sf::Joystick::Axis> JoystickAxisConverter =
+            {{
+                 {GameRange::BASIC_JOYSTICK_H, sf::Joystick::Axis::X},
+                 {GameRange::BASIC_JOYSTICK_V, sf::Joystick::Axis::Y},
+
+                 {GameRange::VIEWER_JOYSTICK_H, sf::Joystick::Axis::U},
+                 {GameRange::BASIC_MOUSE_H, sf::Joystick::Axis::V},
+
+                 {GameRange::BASIC_CROSS_H, sf::Joystick::Axis::PovX},
+                 {GameRange::BASIC_CROSS_V, sf::Joystick::Axis::PovY},
+             }};
+
+
         std::unordered_map<std::string, GameRange> GameRangeConverter =
             {{
                  {"BASIC_MOUSE_H", GameRange::BASIC_MOUSE_H},

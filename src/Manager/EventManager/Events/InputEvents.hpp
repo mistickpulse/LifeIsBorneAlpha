@@ -6,6 +6,7 @@
 #define LIFEISBORNE_INPUTEVENTS_HPP
 
 #include "AEvent.hpp"
+#include "../../InputManager/Context/ContextList.hpp"
 
 namespace Evt
 {
@@ -27,7 +28,14 @@ namespace Evt
         const uint8_t qte;
     };
 
+    struct ChangeInputContext : public AEvent
+    {
+        explicit ChangeInputContext(Inputs::ContextList _ctx) :
+            AEvent("Changin Input Context"), ctx(_ctx)
+        {}
 
+        Inputs::ContextList ctx;
+    };
 }
 
 #endif //LIFEISBORNE_INPUTEVENTS_HPP

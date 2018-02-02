@@ -49,7 +49,6 @@ void Inputs::InputContext::__loadControllerInputs(Inputs::InputContext::json &da
 void Inputs::InputContext::__loadKeyboardInputs(Inputs::InputContext::json &data)
 {
     for (json::iterator i = data.begin(); i != data.end(); ++i) {
-        std::cout << i.key() << ":" << i.value() << std::endl;
         _KeyboarButtonMapping.insert({
                                          _contxtHelper.rawKeyConverter[i.key()],
                                          _contxtHelper.ActionConverter[i.value()]
@@ -69,7 +68,6 @@ void Inputs::InputContext::__loadAxisInputs(Inputs::InputContext::json &data)
 
 void Inputs::InputContext::__loadAxisSensivity(Inputs::InputContext::json &data)
 {
-
     unsigned char tmp = 0;
     for (json::iterator i = data.begin(); i != data.end(); ++i) {
         if (tmp == 0) {

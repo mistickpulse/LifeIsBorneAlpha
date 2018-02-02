@@ -9,9 +9,9 @@ namespace Inputs
 {
     enum ContextList
     {
-        GAME,
-        MENU,
-        RAW_MENU
+        Game,
+        Menu,
+        RawMenu,
     };
 }
 

@@ -18,15 +18,16 @@ namespace Inputs
     //Forward
     struct RangeConvertedPackage;
 
-    using RangeCompute = std::function<void(RangeConvertedPackage &, int, int)>;
+    using RangeCompute = std::function<void(RangeConvertedPackage &, int ControlerId)>;
 
     struct RangeConvertedPackage
     {
-        RangeCompute computeRange;
-        Interval<int> interval;
-        Position pos;
+        RangeCompute computeRange{};
+        Interval<int> interval{0, 0};
+        Position pos{0, 0};
         int Sensivity_x{50};
         int Sensivity_y{50};
+        char ControlerId{-1};
     };
 
     class RangeConverter : public Singleton<RangeConverter>
@@ -70,10 +71,9 @@ namespace Inputs
 
         std::unordered_map<GameRange, RangeConvertedPackage> _rangesInterval =
             {{
-                 {GameRange::BASIC_MOUSE_H, {{[](RangeConvertedPackage &pck, [[maybe_unused]]int x,
-                                                 [[maybe_unused]]int y) {
-
-                     pck.pos.x = (x - pck.pos.x) * pck.Sensivity_x;
+                 {GameRange::BASIC_MOUSE_H, {{[](RangeConvertedPackage &pck, [[maybe_unused]]int ControlerId) {
+                     sf::Vector2i v = sf::Mouse::getPosition();
+                     pck.pos.x = (v.x - pck.pos.x) * pck.Sensivity_x;
                      if (pck.pos.x < pck.interval.min) {
                          pck.pos.x = pck.interval.min;
                      } else if (pck.pos.x >= pck.interval.max) {
@@ -81,10 +81,9 @@ namespace Inputs
                      }
                  }}, {-1, -1}, {}}},
 
-                 {GameRange::BASIC_MOUSE_V, {{[](RangeConvertedPackage &pck, [[maybe_unused]]int x,
-                                                 [[maybe_unused]]int y) {
-
-                     pck.pos.y = (y - pck.pos.y) * pck.Sensivity_y;
+                 {GameRange::BASIC_MOUSE_V, {{[](RangeConvertedPackage &pck, [[maybe_unused]]int ControlerId) {
+                     sf::Vector2i v = sf::Mouse::getPosition();
+                     pck.pos.y = (v.y - pck.pos.y) * pck.Sensivity_y;
                      if (pck.pos.y < pck.interval.min) {
                          pck.pos.y = pck.interval.min;
                      } else if (pck.pos.y > pck.interval.max) {
@@ -92,26 +91,45 @@ namespace Inputs
                      }
                  }}, {-1, -1}, {}}},
 
-                 {GameRange::VIEWER_MOUSE_H, {{[]([[maybe_unused]]RangeConvertedPackage &pck, [[maybe_unused]]int x,
-                                                  [[maybe_unused]]int y) {
-                     //trigo du cul sur mouse
+                 {GameRange::VIEWER_MOUSE_H, {{[]([[maybe_unused]]RangeConvertedPackage &pck,
+                                                  [[maybe_unused]]int ControlerId) {
+                     std::cout << "Computing ViewerMouse_H" << std::endl;
+                     sf::Vector2i v = sf::Mouse::getPosition();
+                     pck.pos.x = v.x;
                  }}, {-1, -1}, {}}},
-                 {GameRange::VIEWER_MOUSE_V, {{[]([[maybe_unused]]RangeConvertedPackage &pck, [[maybe_unused]]int x,
-                                                  [[maybe_unused]]int y) {
+                 {GameRange::VIEWER_MOUSE_V, {{[]([[maybe_unused]]RangeConvertedPackage &pck,
+                                                  [[maybe_unused]]int ControlerId) {
+                     std::cout << "Computing ViewerMouse_V" << std::endl;
+                     sf::Vector2i v = sf::Mouse::getPosition();
+                     pck.pos.y = v.y;
                  }}, {-1, -1}, {}}},
 
-                 {GameRange::BASIC_JOYSTICK_H, {{[]([[maybe_unused]]RangeConvertedPackage &pck, [[maybe_unused]]int x,
-                                                    [[maybe_unused]]int y) {
+                 {GameRange::BASIC_JOYSTICK_H, {{[]([[maybe_unused]]RangeConvertedPackage &pck,
+                                                    [[maybe_unused]]int ControlerId) {
+                     BindingContextHelper &ctxHelper = BindingContextHelper::getInstance();
+                     pck.pos.x = static_cast<int>(sf::Joystick::getAxisPosition(static_cast<unsigned int>(ControlerId),
+                                                                                ctxHelper.JoystickAxisConverter[GameRange::BASIC_JOYSTICK_H]));
+
                  }}, {-100, 100}, {}}},
-                 {GameRange::BASIC_JOYSTICK_V, {{[]([[maybe_unused]]RangeConvertedPackage &pck, [[maybe_unused]]int x,
-                                                    [[maybe_unused]]int y) {
+                 {GameRange::BASIC_JOYSTICK_V, {{[]([[maybe_unused]]RangeConvertedPackage &pck,
+                                                    [[maybe_unused]]int ControlerId) {
+                     BindingContextHelper &ctxHelper = BindingContextHelper::getInstance();
+                     pck.pos.y = static_cast<int>(sf::Joystick::getAxisPosition(static_cast<unsigned int>(ControlerId),
+                                                                                ctxHelper.JoystickAxisConverter[GameRange::BASIC_JOYSTICK_V]));
                  }}, {-100, 100}, {}}},
 
-                 {GameRange::VIEWER_JOYSTICK_H, {{[]([[maybe_unused]]RangeConvertedPackage &pck, [[maybe_unused]]int x,
-                                                     [[maybe_unused]]int y) {
+                 {GameRange::VIEWER_JOYSTICK_H, {{[]([[maybe_unused]]RangeConvertedPackage &pck,
+                                                     [[maybe_unused]]int ControlerId) {
                  }}, {-1, -1}, {}}},
-                 {GameRange::VIEWER_JOYSTICK_V, {{[]([[maybe_unused]]RangeConvertedPackage &pck, [[maybe_unused]]int x,
-                                                     [[maybe_unused]]int y) {
+                 {GameRange::VIEWER_JOYSTICK_V, {{[]([[maybe_unused]]RangeConvertedPackage &pck,
+                                                     [[maybe_unused]]int ControlerId) {
+                 }}, {-1, -1}, {}}},
+
+                 {GameRange::BASIC_CROSS_H, {{[]([[maybe_unused]]RangeConvertedPackage &pck,
+                                                 [[maybe_unused]]int ControlerId) {
+                 }}, {-1, -1}, {}}},
+                 {GameRange::BASIC_CROSS_V, {{[]([[maybe_unused]]RangeConvertedPackage &pck,
+                                                 [[maybe_unused]]int ControlerId) {
                  }}, {-1, -1}, {}}}
              }};
     };

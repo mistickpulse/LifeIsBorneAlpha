@@ -11,6 +11,7 @@
 #include <map>
 #include "../../utils/Singleton.hpp"
 #include "../EventManager/Events/EventList.hpp"
+#include "Context/InputContextManager.hpp"
 
 namespace Inputs
 {
@@ -28,6 +29,9 @@ namespace Inputs
         ~InputManager() override;
 
         void __load();
+
+    private:
+        InputContextManager _ictxMgr;
     };
 }
 

@@ -22,7 +22,10 @@ namespace Inputs
         VIEWER_JOYSTICK_V,
 
         BASIC_JOYSTICK_H,
-        BASIC_JOYSTICK_V
+        BASIC_JOYSTICK_V,
+
+        BASIC_CROSS_H,
+        BASIC_CROSS_V
     };
 }
 
