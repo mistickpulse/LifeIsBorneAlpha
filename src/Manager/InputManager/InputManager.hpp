@@ -27,6 +27,7 @@ namespace Inputs
 
         ~InputManager() override;
 
+        void __load();
     };
 }
 

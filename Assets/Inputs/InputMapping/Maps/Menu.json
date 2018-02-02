@@ -12,11 +12,11 @@
       "W": "UP",
       "A": "LEFT",
       "D": "RIGHT",
-      "SPACE": "ROLL",
-      "LEFT_SHIFT": "STATUE",
+      "Space": "ROLL",
+      "LShift": "STATUE",
       "F": "FUSION",
       "E": "INTERRACT",
-      "ESCAPE": "PAUSE"
+      "Escape": "PAUSE"
     },
     "RawInputAxis": {
       "LEFT_X": "BASIC_JOYSTICK_H",

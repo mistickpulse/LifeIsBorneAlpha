@@ -11,17 +11,14 @@ namespace Inputs
     /*List of all Ranged that are mapped to input */
     enum class GameRange
     {
-        /* Mouse Raw Axes */
 
-            BASIC_MOUSE_H,
+        BASIC_MOUSE_H,
         BASIC_MOUSE_V,
 
         VIEWER_MOUSE_H,
         VIEWER_MOUSE_V,
 
-        /* Joystick Raw Axes */
-
-            VIEWER_JOYSTICK_H,
+        VIEWER_JOYSTICK_H,
         VIEWER_JOYSTICK_V,
 
         BASIC_JOYSTICK_H,

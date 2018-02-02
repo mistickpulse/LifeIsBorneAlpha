@@ -10,8 +10,8 @@ set(HDR_CORE src/core.hpp)
 
 ## Manager Sources
 ##InputManager Sources
-set(SRC_MANAGER_INPUT src/Manager/InputManager/InputManager.cpp)
-set(HDR_MANAGER_INPUT src/Manager/InputManager/InputManager.hpp src/Manager/InputManager/RawInputConstant.hpp src/Manager/InputManager/InputConstant.hpp src/Manager/InputManager/Context/ContextManager.hpp src/Manager/InputManager/Context/ContextList.hpp src/Manager/InputManager/RangeConverter.hpp)
+set(SRC_MANAGER_INPUT src/Manager/InputManager/InputManager.cpp src/Manager/InputManager/Context/InputContext.cpp)
+set(HDR_MANAGER_INPUT src/Manager/InputManager/InputManager.hpp src/Manager/InputManager/RawInputConstant.hpp src/Manager/InputManager/InputConstant.hpp src/Manager/InputManager/Context/ContextManager.hpp src/Manager/InputManager/Context/ContextList.hpp src/Manager/InputManager/RangeConverter.hpp src/Manager/InputManager/Context/InputContext.hpp src/Manager/InputManager/BindingContextHelper.hpp)
 
 set(SRC_SCENE src/Scenes/Intro/IntroScene.cpp src/Scenes/SalleArcade/ArcadeScene.cpp src/Manager/SceneManager/ScenesManager.cpp)
 set(HDR_SCENE src/Manager/SceneManager/ScenesManager.hpp src/Scenes/SalleArcade/ArcadeScene.hpp src/Scenes/SalleArcade/TextureId.hpp)
@@ -40,15 +40,17 @@ set(HDR_MANAGER ${HDR_MANAGER_INPUT} ${HDR_MANAGER_RESSOURCE} ${HDR_SCENE} ${HDR
 ## Set all Sources to SRC & HDR variable
 
 set(SRC ${SRC_CORE} ${SRC_MANAGER})
-set(HDR ${HDR_CORE} ${HDR_MANAGER} src/utils/Singleton.hpp src/Scenes/SceneList.hpp src/Manager/SceneManager/AScene.hpp src/Scenes/Intro/IntroScene.hpp src/Scenes/Intro/TextureId.hpp src/Scenes/ForwardScene.hpp src/utils/Position.hpp src/utils/Interval.hpp src/GlobalConf.hpp src/GameAction.hpp src/GameState.hpp)
+set(HDR ${HDR_CORE} ${HDR_MANAGER} src/utils/Singleton.hpp src/Scenes/SceneList.hpp src/Manager/SceneManager/AScene.hpp src/Scenes/Intro/IntroScene.hpp src/Scenes/Intro/TextureId.hpp src/Scenes/ForwardScene.hpp src/utils/Position.hpp src/utils/Interval.hpp src/GlobalConf.hpp src/GameAction.hpp src/GameState.hpp src/GlobalConf.cpp)
 
 
 ## Setup cmake Moule paths
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/module)
 
 ## Search for lib
+set(Thor_LIBRARIES /usr/local/lib/libthor.so)
 find_package(Boost COMPONENTS system filesystem REQUIRED)
 find_package(SFML 2 REQUIRED system network audio graphics window)
+
 
 
 ##
@@ -64,6 +66,6 @@ endif()
 
 if (Boost_FOUND)
     include_directories(Headers ${Boost_INCLUDE_DIRS})
-    target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES})
+    target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES} ${Thor_LIBRARIES})
     link_directories(${Boost_LIBRARY_DIRS})
 endif()

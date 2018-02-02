@@ -11,8 +11,6 @@
 
 namespace Inputs
 {
-    using RawInputKeyboardButton =  sf::Keyboard::Key;
-
     enum RawInputControllerButton
     {
         CROSS,
@@ -28,19 +26,18 @@ namespace Inputs
         CENTRAL_BUTTON,
     };
 
-    using sfAxis = sf::Joystick::Axis;
     enum RawInputAxis
     {
-        LEFT_X = sfAxis::X,
-        LEFT_Y = sfAxis::Y,
-        LEFT_CLIC = sfAxis::Z,
+        LEFT_X,
+        LEFT_Y,
+        LEFT_CLIC,
 
-        RIGHT_X = sfAxis::U,
-        RIGHT_Y = sfAxis::V,
-        RIGHT_CLIC = sfAxis::R,
+        RIGHT_X,
+        RIGHT_Y,
+        RIGHT_CLIC,
 
-        CROSS_X = sfAxis::PovX,
-        CROSS_Y = sfAxis::PovY,
+        CROSS_X,
+        CROSS_Y,
         MOUSE_X,
         MOUSE_Y
     };

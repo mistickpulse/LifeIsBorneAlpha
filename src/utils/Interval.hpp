@@ -6,10 +6,9 @@
 #define LIFEISBORNE_INTERVAL_HPP
 
 template <typename Stockage>
-class Interval
+struct Interval
 {
 public:
-    friend class RangeConverter;
 
     Interval() :
         min(0), max(0)
@@ -19,7 +18,7 @@ public:
         min(a), max(b)
     {}
 
-    bool isReady()
+    bool isTestValid()
     {
         if (min == max)
             return false;
@@ -31,7 +30,7 @@ public:
         return (min < op) && (op < max);
     }
 
-private:
+public:
     Stockage min;
     Stockage max;
 };

@@ -12,7 +12,8 @@ namespace {
 }
 
 Core::Core() :
-    win(WindowSize, WindowName), _evtMgr(Evt::EventManager::getInstance()), _scManager(win)
+    win(WindowSize, WindowName), _inptMgr(Inputs::InputManager::getInstance()),
+    _evtMgr(Evt::EventManager::getInstance()), _scManager(win)
 {
     _evtMgr.subscribe<Evt::StopGame>(*this);
 }

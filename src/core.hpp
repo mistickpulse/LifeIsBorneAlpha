@@ -29,6 +29,7 @@ public:
 
 private:
     sf::RenderWindow win;
+    Inputs::InputManager &_inptMgr;
     Evt::EventManager &_evtMgr;
     SceneManager _scManager;
 

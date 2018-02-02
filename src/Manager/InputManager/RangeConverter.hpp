@@ -18,13 +18,15 @@ namespace Inputs
     //Forward
     struct RangeConvertedPackage;
 
-    using RangeCompute = std::function<void(RangeConvertedPackage &)>;
+    using RangeCompute = std::function<void(RangeConvertedPackage &, int, int)>;
 
     struct RangeConvertedPackage
     {
         RangeCompute computeRange;
         Interval<int> interval;
         Position pos;
+        int Sensivity_x{50};
+        int Sensivity_y{50};
     };
 
     class RangeConverter : public Singleton<RangeConverter>
@@ -39,6 +41,14 @@ namespace Inputs
         ~RangeConverter() = default;
 
     public:
+        void receive(Evt::ChangeScreenSize &evt)
+        {
+            _rangesInterval[GameRange::BASIC_MOUSE_H].interval.min = 0;
+            _rangesInterval[GameRange::BASIC_MOUSE_H].interval.max = evt.size_x;
+
+            _rangesInterval[GameRange::BASIC_MOUSE_V].interval.min = 0;
+            _rangesInterval[GameRange::BASIC_MOUSE_V].interval.max = evt.size_y;
+        }
 
     private:
         void __initRangeBehavior()
@@ -46,21 +56,6 @@ namespace Inputs
         }
 
     private:
-
-        std::unordered_map<std::string, GameRange> _rangedId =
-            {{
-                 {"BASIC_MOUSE_H", GameRange::BASIC_MOUSE_H},
-                 {"BASIC_MOUSE_V", GameRange::BASIC_MOUSE_V},
-
-                 {"VIEWER_MOUSE_H", GameRange::VIEWER_MOUSE_H},
-                 {"VIEWER_MOUSE_V", GameRange::VIEWER_MOUSE_V},
-
-                 {"BASIC_JOYSTICK_H", GameRange::BASIC_JOYSTICK_H},
-                 {"BASIC_JOYSTICK_V", GameRange::BASIC_JOYSTICK_V},
-
-                 {"VIEWER_JOYSTICK_H", GameRange::VIEWER_JOYSTICK_H},
-                 {"VIEWER_JOYSTICK_V", GameRange::VIEWER_JOYSTICK_V},
-             }};
 
         /*
          * Pour le moi de demain,
@@ -75,17 +70,49 @@ namespace Inputs
 
         std::unordered_map<GameRange, RangeConvertedPackage> _rangesInterval =
             {{
-                 {GameRange::BASIC_MOUSE_H, {{[]([[maybe_unused]]RangeConvertedPackage &pck) {}}, {-1, -1}, {}}},
-                 {GameRange::BASIC_MOUSE_V, {{[]([[maybe_unused]]RangeConvertedPackage &pck) {}}, {-1, -1}, {}}},
+                 {GameRange::BASIC_MOUSE_H, {{[](RangeConvertedPackage &pck, [[maybe_unused]]int x,
+                                                 [[maybe_unused]]int y) {
 
-                 {GameRange::VIEWER_MOUSE_H, {{[]([[maybe_unused]]RangeConvertedPackage &pck) {}}, {-1, -1}, {}}},
-                 {GameRange::VIEWER_MOUSE_V, {{[]([[maybe_unused]]RangeConvertedPackage &pck) {}}, {-1, -1}, {}}},
+                     pck.pos.x = (x - pck.pos.x) * pck.Sensivity_x;
+                     if (pck.pos.x < pck.interval.min) {
+                         pck.pos.x = pck.interval.min;
+                     } else if (pck.pos.x >= pck.interval.max) {
+                         pck.pos.x = pck.interval.max;
+                     }
+                 }}, {-1, -1}, {}}},
 
-                 {GameRange::BASIC_JOYSTICK_H, {{[]([[maybe_unused]]RangeConvertedPackage &pck) {}}, {-100, 100}, {}}},
-                 {GameRange::BASIC_JOYSTICK_V, {{[]([[maybe_unused]]RangeConvertedPackage &pck) {}}, {-100, 100}, {}}},
+                 {GameRange::BASIC_MOUSE_V, {{[](RangeConvertedPackage &pck, [[maybe_unused]]int x,
+                                                 [[maybe_unused]]int y) {
 
-                 {GameRange::VIEWER_JOYSTICK_H, {{[]([[maybe_unused]]RangeConvertedPackage &pck) {}}, {-1, -1}, {}}},
-                 {GameRange::VIEWER_JOYSTICK_V, {{[]([[maybe_unused]]RangeConvertedPackage &pck) {}}, {-1, -1}, {}}}
+                     pck.pos.y = (y - pck.pos.y) * pck.Sensivity_y;
+                     if (pck.pos.y < pck.interval.min) {
+                         pck.pos.y = pck.interval.min;
+                     } else if (pck.pos.y > pck.interval.max) {
+                         pck.pos.y = pck.interval.max;
+                     }
+                 }}, {-1, -1}, {}}},
+
+                 {GameRange::VIEWER_MOUSE_H, {{[]([[maybe_unused]]RangeConvertedPackage &pck, [[maybe_unused]]int x,
+                                                  [[maybe_unused]]int y) {
+                     //trigo du cul sur mouse
+                 }}, {-1, -1}, {}}},
+                 {GameRange::VIEWER_MOUSE_V, {{[]([[maybe_unused]]RangeConvertedPackage &pck, [[maybe_unused]]int x,
+                                                  [[maybe_unused]]int y) {
+                 }}, {-1, -1}, {}}},
+
+                 {GameRange::BASIC_JOYSTICK_H, {{[]([[maybe_unused]]RangeConvertedPackage &pck, [[maybe_unused]]int x,
+                                                    [[maybe_unused]]int y) {
+                 }}, {-100, 100}, {}}},
+                 {GameRange::BASIC_JOYSTICK_V, {{[]([[maybe_unused]]RangeConvertedPackage &pck, [[maybe_unused]]int x,
+                                                    [[maybe_unused]]int y) {
+                 }}, {-100, 100}, {}}},
+
+                 {GameRange::VIEWER_JOYSTICK_H, {{[]([[maybe_unused]]RangeConvertedPackage &pck, [[maybe_unused]]int x,
+                                                     [[maybe_unused]]int y) {
+                 }}, {-1, -1}, {}}},
+                 {GameRange::VIEWER_JOYSTICK_V, {{[]([[maybe_unused]]RangeConvertedPackage &pck, [[maybe_unused]]int x,
+                                                     [[maybe_unused]]int y) {
+                 }}, {-1, -1}, {}}}
              }};
     };
 }

@@ -16,15 +16,15 @@
       "W": "UP",
       "A": "LEFT",
       "D": "RIGHT",
-      "NUMPAD_1": "SPELL1",
-      "NUMPAD_2": "SPELL2",
-      "NUMPAD_3": "SPELL3",
-      "NUMPAD_4": "SPELL4",
-      "SPACE": "ROLL",
-      "LEFT_SHIFT": "STATUE",
+      "Num1": "SPELL1",
+      "Num2": "SPELL2",
+      "Num3": "SPELL3",
+      "Num4": "SPELL4",
+      "Space": "ROLL",
+      "LShift": "STATUE",
       "F": "FUSION",
       "E": "INTERRACT",
-      "ESCAPE": "PAUSE"
+      "Escape": "PAUSE"
     },
     "RawInputAxis": {
       "LEFT_X": "BASIC_JOYSTICK_H",

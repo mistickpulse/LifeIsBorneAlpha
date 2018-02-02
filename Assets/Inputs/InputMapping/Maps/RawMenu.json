@@ -10,7 +10,7 @@
       "W": "UP",
       "A": "LEFT",
       "D": "RIGHT",
-      "ESCAPE": "QUIT"
+      "Escape": "QUIT"
     },
     "RawInputAxis": {
       "LEFT_X": "BASIC_JOYSTICK_H",
@@ -19,6 +19,7 @@
       "MOUSE_Y": "BASIC_MOUSE_V",
       "CROSS_X": "BASIC_JOYSTICK_H",
       "CROSS_Y": "BASIC_JOYSICK_V"
-    }
+    },
+    "AxisSensivity": {}
   }
 }

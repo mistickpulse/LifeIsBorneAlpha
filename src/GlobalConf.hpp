@@ -7,12 +7,16 @@
 
 #include <string>
 
-namespace
+struct Param
 {
-    const std::string AssetRelativPath = "../";
-    const std::string AssetDirectory = "Assets";
+    Param();
+    static unsigned int ScreenSize_x;
+    static unsigned int ScreenSize_y;
 
-    const std::string AssetsPath = AssetRelativPath + AssetDirectory;
-}
+    static std::string AssetRelativPath;
+    static std::string AssetDirectory;
+
+    static std::string AssetsPath;
+};
 
 #endif //LIFEISBORNE_GLOBALCONF_HPP
