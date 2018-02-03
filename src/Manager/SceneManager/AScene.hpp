@@ -8,12 +8,14 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include "../EventManager/EventManager.hpp"
 #include "../EventManager/Events/SceneEvents.hpp"
+#include "../InputManager/InputManager.hpp"
 
 class AScene
 {
 public:
     AScene(sf::RenderWindow &win, const std::string &SceneName) :
-        win(win), _evtMgr(Evt::EventManager::getInstance()), _name(SceneName)
+        win(win), _evtMgr(Evt::EventManager::getInstance()), _inputMgr(Inputs::InputManager::getInstance()),
+        _name(SceneName)
     {
     }
 
@@ -36,6 +38,7 @@ public:
 protected:
     sf::RenderWindow &win;
     Evt::EventManager &_evtMgr;
+    Inputs::InputManager &_inputMgr;
     const std::string _name;
     bool _paused = false;
 };

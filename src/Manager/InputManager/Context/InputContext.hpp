@@ -11,6 +11,7 @@
 #include "../RawInputConstant.hpp"
 #include "../BindingContextHelper.hpp"
 #include "../RangeConverter.hpp"
+#include "../MappedInput.hpp"
 
 namespace Inputs
 {
@@ -48,7 +49,13 @@ namespace Inputs
         explicit InputContext(const std::string &DirMapPath, const InputMapId &MapName);
         ~InputContext() = default;
 
+        void compute(MappedInput &mi);
+
+
     private:
+        void __computeKeyboard(MappedInput &mi);
+        void __computeController(MappedInput &mi);
+
         void __loadMapping();
 
     private:

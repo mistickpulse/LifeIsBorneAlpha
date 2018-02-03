@@ -7,12 +7,17 @@
 
 #include <queue>
 #include "../../GameAction.hpp"
+#include "../../utils/Position.hpp"
 
-struct MappedInput
+namespace Inputs
 {
-    std::queue<GameAction> _action;
-    char ControllerId{-1}; // if == -1 -> Mouse + Keyboard, otherWise -> Only Controller;
 
-};
-
+    struct MappedInput
+    {
+        std::queue<GameAction> _action;
+        Position _pos;
+        std::vector<RawInputAxis> *_axis;
+        char ControllerId{-1}; // if == -1 -> Mouse + Keyboard, otherWise -> Only Controller;
+    };
+}
 #endif //LIFEISBORNE_MAPPEDINPUT_HPP

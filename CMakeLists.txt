@@ -40,7 +40,7 @@ set(HDR_MANAGER ${HDR_MANAGER_INPUT} ${HDR_MANAGER_RESSOURCE} ${HDR_SCENE} ${HDR
 ## Set all Sources to SRC & HDR variable
 
 set(SRC ${SRC_CORE} ${SRC_MANAGER})
-set(HDR ${HDR_CORE} ${HDR_MANAGER} src/utils/Singleton.hpp src/Scenes/SceneList.hpp src/Manager/SceneManager/AScene.hpp src/Scenes/Intro/IntroScene.hpp src/Scenes/Intro/TextureId.hpp src/Scenes/ForwardScene.hpp src/utils/Position.hpp src/utils/Interval.hpp src/GlobalConf.hpp src/GameAction.hpp src/GameState.hpp src/GlobalConf.cpp)
+set(HDR ${HDR_CORE} ${HDR_MANAGER} src/utils/Singleton.hpp src/Scenes/SceneList.hpp src/Manager/SceneManager/AScene.hpp src/Scenes/Intro/IntroScene.hpp src/Scenes/Intro/TextureId.hpp src/Scenes/ForwardScene.hpp src/utils/Position.hpp src/utils/Interval.hpp src/GlobalConf.hpp src/GameAction.hpp src/GameState.hpp src/GlobalConf.cpp src/PlayerMode.hpp)
 
 
 ## Setup cmake Moule paths

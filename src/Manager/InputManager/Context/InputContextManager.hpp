@@ -40,13 +40,17 @@ namespace Inputs
     public:
         InputContext *getActiveContext();
 
+        void compute(MappedInput &mi)
+        {
+            _ActiveContext->compute(mi);
+        }
+
+
     public: // Event Handler
         void receive(const Evt::ChangeInputContext &evt);
 
 
-
         /* ====================== Private Field =================  */
-
 
 
     private:

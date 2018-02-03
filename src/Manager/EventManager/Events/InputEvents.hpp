@@ -7,6 +7,7 @@
 
 #include "AEvent.hpp"
 #include "../../InputManager/Context/ContextList.hpp"
+#include "../../../PlayerMode.hpp"
 
 namespace Evt
 {
@@ -35,6 +36,25 @@ namespace Evt
         {}
 
         Inputs::ContextList ctx;
+    };
+
+    struct ChangePlayerMode : public AEvent
+    {
+        explicit ChangePlayerMode(PlayerMode mode) :
+            AEvent("Changing Player Mode"), _mode(mode)
+        {}
+
+        PlayerMode _mode;
+    };
+
+    struct DisconectedJoystick : public AEvent
+    {
+        explicit DisconectedJoystick(int PlayerId) :
+            AEvent("Disconected Joystick"), _playerId(PlayerId)
+        {
+        }
+
+        int _playerId;
     };
 }
 

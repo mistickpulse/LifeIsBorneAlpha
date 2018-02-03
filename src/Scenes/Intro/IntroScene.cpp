@@ -8,6 +8,7 @@
 
 void IntroScene::enter()
 {
+    _evtMgr.emit<Evt::ChangeInputContext>(Inputs::ContextList::Menu);
     std::cout << "entering Scene" << std::endl;
     win.clear(sf::Color::Black);
     __load();

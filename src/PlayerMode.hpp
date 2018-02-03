@@ -1,0 +1,16 @@
+//
+// Created by zouz on 03/02/18.
+//
+
+#ifndef LIFEISBORNE_PLAYERMODE_HPP
+#define LIFEISBORNE_PLAYERMODE_HPP
+
+enum PlayerMode
+{
+    ONE_PLAYER = 1,
+    TWO_PLAYER,
+    THREE_PLAYER,
+    FOUR_PLAYER
+};
+
+#endif //LIFEISBORNE_PLAYERMODE_HPP

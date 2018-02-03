@@ -48,6 +48,7 @@ namespace Inputs
                  {"LEFT", GameAction::LEFT},
                  {"RIGHT", GameAction::RIGHT},
                  {"UP", GameAction::UP},
+                 {"DOWN", GameAction::DOWN},
                  {"SPELL1", GameAction::SPELL1},
                  {"SPELL2", GameAction::SPELL2},
                  {"SPELL3", GameAction::SPELL3},

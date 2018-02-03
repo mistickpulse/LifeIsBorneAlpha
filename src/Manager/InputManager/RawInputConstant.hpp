@@ -38,6 +38,7 @@ namespace Inputs
 
         CROSS_X,
         CROSS_Y,
+
         MOUSE_X,
         MOUSE_Y
     };

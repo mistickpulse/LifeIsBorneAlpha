@@ -79,3 +79,46 @@ void Inputs::InputContext::__loadAxisSensivity(Inputs::InputContext::json &data)
     }
 }
 
+void Inputs::InputContext::compute(MappedInput &mi)
+{
+    if (mi.ControllerId == -1) {
+        __computeKeyboard(mi);
+    } else {
+        __computeController(mi);
+    }
+}
+
+void Inputs::InputContext::__computeKeyboard(MappedInput &mi)
+{
+    for (const auto &i : _KeyboarButtonMapping) {
+        if (sf::Keyboard::isKeyPressed(i.first)) {
+            mi._action.push(i.second);
+        }
+    }
+
+    RangeConverter &rc = RangeConverter::getInstance();
+    for (const auto &i : *mi._axis) {
+        GameRange currentRange = _AxisMapping[i];
+        RangeConvertedPackage &rangePckge = rc.getRangeConvertedPackage(currentRange);
+        rangePckge.mappedInputs = &mi;
+        rangePckge.computeRange(rangePckge, mi.ControllerId);
+    }
+}
+
+void Inputs::InputContext::__computeController(MappedInput &mi)
+{
+    for (const auto &i : _ControllerButtonMapping) {
+        if (sf::Joystick::isButtonPressed(mi.ControllerId, i.first)) {
+            mi._action.push(i.second);
+        }
+    }
+
+    RangeConverter &rc = RangeConverter::getInstance();
+    for (const auto &i : *mi._axis) {
+        GameRange currentRange = _AxisMapping[i];
+        RangeConvertedPackage &rangePckge = rc.getRangeConvertedPackage(currentRange);
+        rangePckge.mappedInputs = &mi;
+        rangePckge.computeRange(rangePckge, mi.ControllerId);
+    }
+}
+

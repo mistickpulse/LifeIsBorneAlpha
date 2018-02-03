@@ -24,7 +24,9 @@
       "RIGHT_X": "VIEWER_JOYSTICK_H",
       "RIGHT_Y": "VIEWER_JOYSTICK_V",
       "MOUSE_X": "VIEWER_MOUSE_H",
-      "MOUSE_Y": "VIEWER_MOUSE_V"
+      "MOUSE_Y": "VIEWER_MOUSE_V",
+      "CROSS_X": "BASIC_CROSS_H",
+      "CROSS_Y": "BASIC_CROSS_V"
     },
     "AxisSensivity": {
       "X_AXIS": 50,

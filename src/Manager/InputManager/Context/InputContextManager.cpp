@@ -21,9 +21,10 @@ Inputs::InputContextManager::InputContextManager()
     auto vec = _contextFile[MappingFieldNames];
     for (auto i : vec) {
         std::string tmp2(i);
-        tmp2 += ".json";//_contextFile[MappingFieldExt];
+        tmp2 += _contextFile[MappingFieldExt];
         try {
             InputContext ctx(_inputContextDir, i);
+            _contexts.insert({_contextNameConverter[i], ctx});
         }
         catch (const std::runtime_error &err) {
             std::cerr << err.what() << std::endl;

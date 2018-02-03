@@ -6,14 +6,24 @@
 #define LIFEISBORNE_RANGECONVERTER_HPP
 
 #include <unordered_map>
+#include <queue>
 #include "InputConstant.hpp"
 #include "../../utils/Interval.hpp"
 #include "../EventManager/EventManager.hpp"
 #include "../EventManager/Events/ParamEvent.hpp"
 #include "../../utils/Position.hpp"
+#include "MappedInput.hpp"
+
+# define CONSTANT_JOYSTICK_MINRANGE 10
 
 namespace Inputs
 {
+    enum class InputMode
+    {
+        MOUSE,
+        CONTROLLER
+    };
+
 
     //Forward
     struct RangeConvertedPackage;
@@ -27,7 +37,7 @@ namespace Inputs
         Position pos{0, 0};
         int Sensivity_x{50};
         int Sensivity_y{50};
-        char ControlerId{-1};
+        MappedInput *mappedInputs{nullptr};
     };
 
     class RangeConverter : public Singleton<RangeConverter>
@@ -35,14 +45,25 @@ namespace Inputs
     public:
         RangeConverter()
         {
-            //auto &evtMgr = Evt::EventManager::getInstance();
-            //evtMgr.subscribe<Evt::ChangeScreenSize>(*this);
+            auto &evtMgr = Evt::EventManager::getInstance();
+            evtMgr.subscribe<Evt::ChangeScreenSize>(*this);
         }
 
         ~RangeConverter() = default;
 
     public:
-        void receive(Evt::ChangeScreenSize &evt)
+        const std::vector<GameRange> &getAuthorisedGameRange(InputMode mode) const
+        {
+            return _InputRangeConverter.at(mode);
+        }
+
+        RangeConvertedPackage &getRangeConvertedPackage(GameRange range)
+        {
+            return _rangesInterval.at(range);
+        }
+
+    public: // Event Handler
+        void receive(const Evt::ChangeScreenSize &evt)
         {
             _rangesInterval[GameRange::BASIC_MOUSE_H].interval.min = 0;
             _rangesInterval[GameRange::BASIC_MOUSE_H].interval.max = evt.size_x;
@@ -52,11 +73,24 @@ namespace Inputs
         }
 
     private:
-        void __initRangeBehavior()
-        {
-        }
 
-    private:
+        std::unordered_map<InputMode, std::vector<GameRange>> _InputRangeConverter =
+            {{
+                 {InputMode::CONTROLLER, {
+                                             GameRange::BASIC_JOYSTICK_H,
+                                             GameRange::BASIC_JOYSTICK_V,
+                                             GameRange::BASIC_CROSS_H,
+                                             GameRange::BASIC_CROSS_V,
+                                             GameRange::VIEWER_JOYSTICK_H,
+                                             GameRange::VIEWER_JOYSTICK_V
+                                         }},
+                 {InputMode::MOUSE, {
+                                        GameRange::BASIC_MOUSE_H,
+                                        GameRange::BASIC_MOUSE_V,
+                                        GameRange::VIEWER_MOUSE_H,
+                                        GameRange::VIEWER_MOUSE_V
+                                    }}
+             }};
 
         /*
          * Pour le moi de demain,
@@ -71,6 +105,8 @@ namespace Inputs
 
         std::unordered_map<GameRange, RangeConvertedPackage> _rangesInterval =
             {{
+
+                 /* Basic Mouse */
                  {GameRange::BASIC_MOUSE_H, {{[](RangeConvertedPackage &pck, [[maybe_unused]]int ControlerId) {
                      sf::Vector2i v = sf::Mouse::getPosition();
                      pck.pos.x = (v.x - pck.pos.x) * pck.Sensivity_x;
@@ -79,6 +115,7 @@ namespace Inputs
                      } else if (pck.pos.x >= pck.interval.max) {
                          pck.pos.x = pck.interval.max;
                      }
+                     pck.mappedInputs->_pos.x = pck.pos.x;
                  }}, {-1, -1}, {}}},
 
                  {GameRange::BASIC_MOUSE_V, {{[](RangeConvertedPackage &pck, [[maybe_unused]]int ControlerId) {
@@ -89,48 +126,102 @@ namespace Inputs
                      } else if (pck.pos.y > pck.interval.max) {
                          pck.pos.y = pck.interval.max;
                      }
+                     pck.mappedInputs->_pos.y = pck.pos.y;
                  }}, {-1, -1}, {}}},
+
+
+
+                 /* Viewer Mouse */
 
                  {GameRange::VIEWER_MOUSE_H, {{[]([[maybe_unused]]RangeConvertedPackage &pck,
                                                   [[maybe_unused]]int ControlerId) {
-                     std::cout << "Computing ViewerMouse_H" << std::endl;
                      sf::Vector2i v = sf::Mouse::getPosition();
                      pck.pos.x = v.x;
                  }}, {-1, -1}, {}}},
                  {GameRange::VIEWER_MOUSE_V, {{[]([[maybe_unused]]RangeConvertedPackage &pck,
                                                   [[maybe_unused]]int ControlerId) {
-                     std::cout << "Computing ViewerMouse_V" << std::endl;
                      sf::Vector2i v = sf::Mouse::getPosition();
                      pck.pos.y = v.y;
                  }}, {-1, -1}, {}}},
 
+
+
+                 /* Basic Joystick */
+
                  {GameRange::BASIC_JOYSTICK_H, {{[]([[maybe_unused]]RangeConvertedPackage &pck,
                                                     [[maybe_unused]]int ControlerId) {
                      BindingContextHelper &ctxHelper = BindingContextHelper::getInstance();
-                     pck.pos.x = static_cast<int>(sf::Joystick::getAxisPosition(static_cast<unsigned int>(ControlerId),
-                                                                                ctxHelper.JoystickAxisConverter[GameRange::BASIC_JOYSTICK_H]));
+                     float pos = sf::Joystick::getAxisPosition(static_cast<unsigned int>(ControlerId),
+                                                               ctxHelper.JoystickAxisConverter[GameRange::BASIC_JOYSTICK_H]);
+                     if (pos > CONSTANT_JOYSTICK_MINRANGE) {
+                         pck.mappedInputs->_action.push(GameAction::RIGHT);
+                     } else if (pos < -CONSTANT_JOYSTICK_MINRANGE) {
+                         pck.mappedInputs->_action.push(GameAction::LEFT);
+                     }
 
                  }}, {-100, 100}, {}}},
                  {GameRange::BASIC_JOYSTICK_V, {{[]([[maybe_unused]]RangeConvertedPackage &pck,
                                                     [[maybe_unused]]int ControlerId) {
                      BindingContextHelper &ctxHelper = BindingContextHelper::getInstance();
-                     pck.pos.y = static_cast<int>(sf::Joystick::getAxisPosition(static_cast<unsigned int>(ControlerId),
+                     float pos = static_cast<int>(sf::Joystick::getAxisPosition(static_cast<unsigned int>(ControlerId),
                                                                                 ctxHelper.JoystickAxisConverter[GameRange::BASIC_JOYSTICK_V]));
+
+                     if (pos > CONSTANT_JOYSTICK_MINRANGE) {
+                         pck.mappedInputs->_action.push(GameAction::DOWN);
+                     } else if (pos < -CONSTANT_JOYSTICK_MINRANGE) {
+                         pck.mappedInputs->_action.push(GameAction::UP);
+                     }
                  }}, {-100, 100}, {}}},
+
+
+
+                 /* Viewer Joystick */
 
                  {GameRange::VIEWER_JOYSTICK_H, {{[]([[maybe_unused]]RangeConvertedPackage &pck,
                                                      [[maybe_unused]]int ControlerId) {
+                     BindingContextHelper &ctxHelper = BindingContextHelper::getInstance();
+                     float pos = sf::Joystick::getAxisPosition(ControlerId,
+                                                               ctxHelper.JoystickAxisConverter[GameRange::VIEWER_JOYSTICK_H]);
+                     (void)pos;
                  }}, {-1, -1}, {}}},
+
                  {GameRange::VIEWER_JOYSTICK_V, {{[]([[maybe_unused]]RangeConvertedPackage &pck,
                                                      [[maybe_unused]]int ControlerId) {
+                     BindingContextHelper &ctxHelper = BindingContextHelper::getInstance();
+                     float pos = sf::Joystick::getAxisPosition(ControlerId,
+                                                               ctxHelper.JoystickAxisConverter[GameRange::VIEWER_JOYSTICK_H]);
+                     (void)pos;
                  }}, {-1, -1}, {}}},
+
+
+                 /* Basic Cross */
+
 
                  {GameRange::BASIC_CROSS_H, {{[]([[maybe_unused]]RangeConvertedPackage &pck,
                                                  [[maybe_unused]]int ControlerId) {
-                 }}, {-1, -1}, {}}},
+
+                     BindingContextHelper &ctxHelper = BindingContextHelper::getInstance();
+                     float pos = sf::Joystick::getAxisPosition(ControlerId,
+                                                               ctxHelper.JoystickAxisConverter[GameRange::BASIC_CROSS_H]);
+                     if (pos < -CONSTANT_JOYSTICK_MINRANGE) {
+                         pck.mappedInputs->_action.push(GameAction::LEFT);
+                     } else if (pos > CONSTANT_JOYSTICK_MINRANGE) {
+                         pck.mappedInputs->_action.push(GameAction::RIGHT);
+                     }
+                 }}, {-100, 100}, {}}},
                  {GameRange::BASIC_CROSS_V, {{[]([[maybe_unused]]RangeConvertedPackage &pck,
                                                  [[maybe_unused]]int ControlerId) {
-                 }}, {-1, -1}, {}}}
+
+                     BindingContextHelper &ctxHelper = BindingContextHelper::getInstance();
+                     float pos = sf::Joystick::getAxisPosition(ControlerId,
+                                                               ctxHelper.JoystickAxisConverter[GameRange::BASIC_CROSS_V]);
+
+                     if (pos < -CONSTANT_JOYSTICK_MINRANGE) {
+                         pck.mappedInputs->_action.push(GameAction::DOWN);
+                     } else if (pos > CONSTANT_JOYSTICK_MINRANGE) {
+                         pck.mappedInputs->_action.push(GameAction::UP);
+                     }
+                 }}, {-100, 100}, {}}}
              }};
     };
 }

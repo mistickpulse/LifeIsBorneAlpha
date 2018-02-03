@@ -8,6 +8,7 @@
 
 void ArcadeScene::enter()
 {
+    _evtMgr.emit<Evt::ChangeInputContext>(Inputs::ContextList::Game);
     std::cout << "entering Scene:" << _name << std::endl;
     win.clear(sf::Color::Black);
     __load();
@@ -28,6 +29,7 @@ void ArcadeScene::resume()
 
 void ArcadeScene::draw()
 {
+    win.clear(sf::Color::Black);
     ArcadeSprites var = ArcadeSprites::BackGround;
     win.draw(_sprite[var._to_string()]);
 }
@@ -35,14 +37,29 @@ void ArcadeScene::draw()
 void ArcadeScene::update([[maybe_unused]]sf::Time &elapsedTime)
 {
     draw();
-
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space)) {
-        _evtMgr.emit<Evt::ChangeScene>(Scenes::SceneType::Intro);
-    }
+    ProcessInput();
 }
 
 void ArcadeScene::ProcessInput()
 {
+    _inputMgr.update();
+    Inputs::PlayerMappedInput &Players = _inputMgr.getPlayerInputs();
+    ArcadeSprites var = ArcadeSprites::BackGround;
+    auto pos = _sprite[var._to_string()].getPosition();
+    while (Players[0]->_action.size()) {
+        GameAction act = Players[0]->_action.front();
+        if (act == GameAction::UP) {
+            pos.y -= 1;
+        } else if (act == GameAction::DOWN) {
+            pos.y += 1;
+        } else if (act == GameAction::LEFT) {
+            pos.x -= 1;
+        } else if (act == GameAction::RIGHT) {
+            pos.x += 1;
+        }
+        _sprite[var._to_string()].setPosition(pos);
+        Players[0]->_action.pop();
+    }
 }
 
 ArcadeScene::ArcadeScene(sf::RenderWindow &win) :
