@@ -11,7 +11,6 @@ namespace Inputs
     /*List of all Ranged that are mapped to input */
     enum class GameRange
     {
-
         BASIC_MOUSE_H,
         BASIC_MOUSE_V,
 

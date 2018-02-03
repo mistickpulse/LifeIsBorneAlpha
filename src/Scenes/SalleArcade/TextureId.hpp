@@ -9,12 +9,14 @@
 
 BETTER_ENUM(ArcadeTexture,
             int,
-            BackGround = 0
+            BackGround = 0,
+            Boris
 );
 
 BETTER_ENUM(ArcadeSprites,
             int,
-            BackGround = 0
+            BackGround = 0,
+            Boris
 )
 
 //Game

@@ -104,7 +104,6 @@ namespace Inputs
     public: /* Event Handlers */
 
         void receive(const Evt::ChangeInputContext &evt);
-
         void receive(const Evt::ChangePlayerMode &evt);
         void receive(const Evt::DisconectedJoystick &evt);
 
@@ -112,7 +111,6 @@ namespace Inputs
 
         int __checkControllerQte() const;
         void __handleJoystickChanges(int qte);
-        bool __checkControllers();
         char __getNewControllerId();
         void __handleDisconnectedJoystick();
         void __disconnectJoystick(int JoystickId);
