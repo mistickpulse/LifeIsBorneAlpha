@@ -11,7 +11,7 @@ set(HDR_CORE src/core.hpp)
 ## Manager Sources
 ##InputManager Sources
 set(SRC_MANAGER_INPUT src/Manager/InputManager/InputManager.cpp src/Manager/InputManager/Context/InputContext.cpp src/Manager/InputManager/Context/InputContextManager.cpp)
-set(HDR_MANAGER_INPUT src/Manager/InputManager/InputManager.hpp src/Manager/InputManager/RawInputConstant.hpp src/Manager/InputManager/InputConstant.hpp src/Manager/InputManager/Context/InputContextManager.hpp src/Manager/InputManager/Context/ContextList.hpp src/Manager/InputManager/RangeConverter.hpp src/Manager/InputManager/Context/InputContext.hpp src/Manager/InputManager/BindingContextHelper.hpp src/Manager/InputManager/InputMapper.hpp src/Manager/InputManager/MappedInput.hpp)
+set(HDR_MANAGER_INPUT src/Manager/InputManager/InputManager.hpp src/Manager/InputManager/RawInputConstant.hpp src/Manager/InputManager/InputConstant.hpp src/Manager/InputManager/Context/InputContextManager.hpp src/Manager/InputManager/Context/ContextList.hpp src/Manager/InputManager/RangeConverter.hpp src/Manager/InputManager/Context/InputContext.hpp src/Manager/InputManager/BindingContextHelper.hpp src/Manager/InputManager/InputMapper.hpp src/Manager/InputManager/MappedInput.hpp src/Manager/InputManager/MappedInput.cpp)
 
 set(SRC_SCENE src/Scenes/Intro/IntroScene.cpp src/Scenes/SalleArcade/ArcadeScene.cpp src/Manager/SceneManager/ScenesManager.cpp)
 set(HDR_SCENE src/Manager/SceneManager/ScenesManager.hpp src/Scenes/SalleArcade/ArcadeScene.hpp src/Scenes/SalleArcade/TextureId.hpp)

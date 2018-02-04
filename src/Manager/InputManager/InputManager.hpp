@@ -18,17 +18,17 @@
 namespace Inputs
 {
 
+# define KEYBOARD_ID (-1)
     class InputContextManager;
-
 
     namespace
     {
-        const unsigned int maxController = 3; // start to 0
-        const unsigned int maxSfmlController = 7;
-        const unsigned int MaxPlayer = 5; // (1 more for the control of Keyboard + controller for the player 1
+        const unsigned int MaximumController = 5;
+        const unsigned int MinimumControler = 1;
+        const unsigned int MaxPlayer = 4;
     }
 
-    using PlayerMappedInput = std::vector<std::shared_ptr<MappedInput>>;
+    using PlayerMappedInput = std::deque<std::shared_ptr<MappedInput>>;
 
     class InputManager : public Singleton<InputManager>
     {
@@ -44,13 +44,46 @@ namespace Inputs
 
         void update();
 
-        void compute();
+        unsigned int getPlayerQte() const
+        {
+            return _playerQte;
+        }
 
         struct ContextRawAxis
         {
             std::vector<RawInputAxis> _controller;
             std::vector<RawInputAxis> _mouse;
         };
+
+    public: /* Event Handlers */
+
+        void receive(const Evt::ChangeInputContext &evt);
+        void receive(const Evt::ChangePlayerMode &evt);
+        void receive(const Evt::DisconectedJoystick &evt);
+
+    private:
+        void __updateContext();
+        void __updateConnectedController();
+        void __ifUnplugedUnloadController();
+        char __getNewControllerId() const;
+        void __loadController();
+        auto __loadKeyboard();
+        void __initControllers();
+        void __updateControllers();
+        unsigned int __getControlerConnectedQte();
+
+    private:
+
+        Evt::EventManager &_evtMgr;
+        ContextList _activeContext{ContextList::Menu};
+        PlayerMappedInput _playersMappedInputs{};
+        InputContextManager _ictxMgr;
+        unsigned int _playerQte{1};
+        unsigned int _controllerConnected{0};
+        PlayerMode _currentMode{PlayerMode::ONE_PLAYER};
+        std::vector<char> _controllerIdConnected{};
+
+    private:
 
         std::unordered_map<ContextList, ContextRawAxis> _ContextToRaw =
             {{
@@ -100,35 +133,6 @@ namespace Inputs
                                            }
                  }
              }};
-
-    public: /* Event Handlers */
-
-        void receive(const Evt::ChangeInputContext &evt);
-        void receive(const Evt::ChangePlayerMode &evt);
-        void receive(const Evt::DisconectedJoystick &evt);
-
-    private:
-
-        int __checkControllerQte() const;
-        void __handleJoystickChanges(int qte);
-        char __getNewControllerId();
-        void __handleDisconnectedJoystick();
-        void __disconnectJoystick(int JoystickId);
-
-        bool __loadControler();
-
-        void __loadKeyboard();
-
-        void __changeInputContext(ContextList ctx);
-
-    private:
-        Evt::EventManager &_evtMgr;
-        ContextList activeContext{ContextList::Menu};
-        PlayerMappedInput _playersMappedInputs{};
-        InputContextManager _ictxMgr;
-        unsigned int _playerQte{0};
-        unsigned int _controllerConnected{0};
-        PlayerMode _currentMode{PlayerMode::ONE_PLAYER};
     };
 }
 

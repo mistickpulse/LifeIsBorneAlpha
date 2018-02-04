@@ -9,7 +9,7 @@
 void ArcadeScene::enter()
 {
     _evtMgr.emit<Evt::ChangeInputContext>(Inputs::ContextList::Game);
-    _evtMgr.emit<Evt::ChangePlayerMode>(PlayerMode::TWO_PLAYER);
+    _evtMgr.emit<Evt::ChangePlayerMode>(PlayerMode::FOUR_PLAYER);
 
     std::cout << "entering Scene:" << _name << std::endl;
     win.clear(sf::Color::Black);
@@ -33,13 +33,16 @@ void ArcadeScene::draw()
 {
     win.clear(sf::Color::Black);
 
+    ArcadeSprites Boris = ArcadeSprites::Boris;
     ArcadeSprites var = ArcadeSprites::BackGround;
     win.draw(_sprite[var._to_string()]);
 
-    ArcadeSprites Boris = ArcadeSprites::Boris;
+    unsigned int _playerQte = _inputMgr.getPlayerQte();
+    auto &PlayersInput = _inputMgr.getPlayerInputs();
 
-    for (auto &i : _inputMgr.getPlayerInputs()) {
-        _sprite[Boris._to_string()].setPosition(i->_pos.x, i->_pos.y);
+    for (unsigned int CPlayerId = 0; CPlayerId < _playerQte && CPlayerId < PlayersInput.size(); ++CPlayerId) {
+        auto &mi = *PlayersInput[CPlayerId];
+        _sprite[Boris._to_string()].setPosition(mi._pos.x, mi._pos.y);
         win.draw(_sprite[Boris._to_string()]);
     }
 }
@@ -53,28 +56,31 @@ void ArcadeScene::update([[maybe_unused]]sf::Time &elapsedTime)
 void ArcadeScene::ProcessInput()
 {
     _inputMgr.update();
-    Inputs::PlayerMappedInput &Players = _inputMgr.getPlayerInputs();
+    Inputs::PlayerMappedInput &PlayersInput = _inputMgr.getPlayerInputs();
+    unsigned int _playerQte = _inputMgr.getPlayerQte();
 
-    for (auto &i : Players) {
-        while (i->_action.size()) {
-            GameAction act = i->_action.front();
-            i->_action.pop();
+    //TMP
+    for (unsigned int CPlayerId = 0; CPlayerId < _playerQte && CPlayerId < PlayersInput.size(); ++CPlayerId) {
+        Inputs::MappedInput &mi = *PlayersInput[CPlayerId];
+        while (mi._action.size()) {
+            GameAction act = mi._action.front();
+            mi._action.pop();
             if (act == GameAction::UP) {
-                i->_pos.y -= 1;
+                mi._pos.y -= 0.2;
             } else if (act == GameAction::DOWN) {
-                i->_pos.y += 1;
+                mi._pos.y += 0.2;
             }
             if (act == GameAction::LEFT) {
-                i->_pos.x -= 1;
+                mi._pos.x -= 0.2;
             } else if (act == GameAction::RIGHT) {
-                i->_pos.x += 1;
+                mi._pos.x += 0.2;
             }
         }
     }
 }
 
 ArcadeScene::ArcadeScene(sf::RenderWindow &win) :
-    AScene(win, "Arcade Scene")
+    AScene(win, "Arcade")
 {}
 
 void ArcadeScene::__load()

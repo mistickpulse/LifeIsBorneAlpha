@@ -11,7 +11,8 @@ Inputs::InputManager::InputManager() :
     _evtMgr.subscribe<Evt::ChangeInputContext>(*this);
     _evtMgr.subscribe<Evt::DisconectedJoystick>(*this);
     _evtMgr.subscribe<Evt::ChangePlayerMode>(*this);
-    __loadKeyboard();
+    __initControllers();
+    //__loadKeyboard();
 }
 
 Inputs::InputManager::~InputManager()
@@ -20,88 +21,15 @@ Inputs::InputManager::~InputManager()
 
 void Inputs::InputManager::update()
 {
-    int ret = __checkControllerQte();
-    if (ret != 0) {
-        std::cout << "Handling Joystick Change" << std::endl;
-        __handleJoystickChanges(ret);
+    __updateControllers();
+    for (auto &it : _playersMappedInputs) {
+        _ictxMgr.compute(*it);
     }
-    compute();
-}
-
-void Inputs::InputManager::compute()
-{
-    for (auto &i : _playersMappedInputs) {
-        _ictxMgr.compute(*i);
-    }
-
-    if (_currentMode == PlayerMode::ONE_PLAYER && _controllerConnected == 1) { //tmp
-        auto &q = _playersMappedInputs[1]->_action;
-        while (q.size()) {
-            _playersMappedInputs[0]->_action.push(q.front());
-            q.pop();
-        }
-    }
-}
-
-char Inputs::InputManager::__getNewControllerId()
-{
-    for (unsigned int ControllerId = 0; ControllerId < sf::Joystick::Count; ++ControllerId) {
-        bool check = true;
-        for (auto &i : _playersMappedInputs) {
-            if (i->ControllerId == static_cast<char>(ControllerId)) {
-                check = false;
-            }
-        }
-        if (check && sf::Joystick::isConnected(ControllerId)) {
-            return static_cast<char>(ControllerId);
-        }
-    }
-    return -1;
-}
-
-bool Inputs::InputManager::__loadControler()
-{
-    char id = __getNewControllerId();
-    if (id == -1) {
-        std::cerr << "unable To handle Anymore Joystick" << std::endl;
-        return false;
-    }
-    std::cout << "Loading Controller with id[" << static_cast<int>(id) << "]" << std::endl;
-
-    ++_controllerConnected;
-    ++_playerQte;
-    MappedInput newController;
-    newController.ControllerId = static_cast<char>(id);
-    newController._axis = &_ContextToRaw.at(activeContext)._controller;
-
-    for (unsigned int i = 0; i < _playersMappedInputs.size(); ++i) {
-        if (i > 0 && _playersMappedInputs[i]->ControllerId == -1) {
-            _playersMappedInputs[i] = std::make_shared<MappedInput>(newController);
-            return true;
-        }
-    }
-
-    _playersMappedInputs.push_back(std::make_shared<MappedInput>(newController));
-    return true;
-}
-
-void Inputs::InputManager::__loadKeyboard()
-{
-    MappedInput newKeyboard;
-    newKeyboard.ControllerId = -1;
-    newKeyboard._axis = &_ContextToRaw.at(activeContext)._mouse;
-    _playersMappedInputs.push_back(std::make_shared<MappedInput>(newKeyboard));
-    ++_playerQte;
-}
-
-void Inputs::InputManager::__changeInputContext(Inputs::ContextList ctx)
-{
-    activeContext = ctx;
-    for (auto &i : _playersMappedInputs) {
-        if (i->ControllerId == -1) {
-            i->_axis = &_ContextToRaw.at(ctx)._mouse;
-        } else {
-            i->_axis = &_ContextToRaw.at(ctx)._controller;
+    //Tmp test
+    if (_currentMode == PlayerMode::ONE_PLAYER && _controllerConnected >= 2) {
+        while (_playersMappedInputs[1]->_action.size()) {
+            _playersMappedInputs[0]->_action.push(_playersMappedInputs[1]->_action.front());
+            _playersMappedInputs[1]->_action.pop();
         }
     }
 }
@@ -110,82 +38,133 @@ void Inputs::InputManager::__changeInputContext(Inputs::ContextList ctx)
 
 void Inputs::InputManager::receive(const Evt::ChangeInputContext &evt)
 {
-    __changeInputContext(evt.ctx);
+    _activeContext = evt.ctx;
+    __updateContext();
 }
 
 void Inputs::InputManager::receive(const Evt::ChangePlayerMode &evt)
 {
-    int act = evt._mode - _currentMode;
-
     _currentMode = evt._mode;
-    _playerQte = evt._mode;
-    while (act < 0) {
-        _playersMappedInputs.erase(_playersMappedInputs.end());
-        --_playerQte;
-        ++act;
-    }
-    while (act > 0) {
-        __loadControler();
-        --act;
-    }
+    _playerQte = static_cast<unsigned int>(evt._mode);
 }
 
 void Inputs::InputManager::receive(const Evt::DisconectedJoystick &evt)
 {
-    __disconnectJoystick(_playersMappedInputs[evt._playerId]->ControllerId);
+    (void)evt;
 }
+
+auto Inputs::InputManager::__loadKeyboard()
+{
+    MappedInput mi;
+    mi._axis = &_ContextToRaw.at(_activeContext)._mouse;
+    mi.ControllerId = KEYBOARD_ID;
+    ++_controllerConnected;
+
+    std::shared_ptr<MappedInput> ptr = std::make_shared<MappedInput>(mi);
+    return ptr;
+}
+
+void Inputs::InputManager::__initControllers()
+{
+    auto ptr = __loadKeyboard();
+    _playersMappedInputs.push_back(ptr);
+}
+
+void Inputs::InputManager::__updateControllers()
+{
+    __updateConnectedController();
+    unsigned int qte = static_cast<unsigned int>(_controllerIdConnected.size());
+    while (_controllerConnected < qte && _controllerConnected < MaximumController) {
+        __loadController();
+    }
+    while (_controllerConnected > qte && _controllerConnected > MinimumControler) {
+        __ifUnplugedUnloadController();
+    }
+}
+
+unsigned int Inputs::InputManager::__getControlerConnectedQte()
+{
+    return 0;
+}
+
+void Inputs::InputManager::__loadController()
+{
+    MappedInput mi;
+    mi.ControllerId = __getNewControllerId();
+    if (mi.ControllerId == -1) {
+        std::cout << "No new Controller Connected" << std::endl;
+        return;
+    }
+    std::cout << "Loading Controller" << std::endl;
+    mi._axis = &_ContextToRaw.at(_activeContext)._controller;
+    std::shared_ptr<MappedInput> ptr = std::make_shared<MappedInput>(mi);
+    _playersMappedInputs.push_back(ptr);
+    ++_controllerConnected;
+}
+
+char Inputs::InputManager::__getNewControllerId() const
+{
+    for (const auto &Connectedid : _controllerIdConnected) {
+
+        bool check = true;
+        for (const auto &MappedInput : _playersMappedInputs) {
+            if (Connectedid == MappedInput->ControllerId) {
+                check = false;
+            }
+        }
+        if (check) {
+            return static_cast<char>(Connectedid);
+        }
+    }
+    return -1;
+}
+
+void Inputs::InputManager::__ifUnplugedUnloadController()
+{
+    std::vector<int> _ControllerPos;
+    int Pos = 0;
+
+    for (auto &Mi : _playersMappedInputs) {
+        bool check = false;
+        for (const auto &ControllerId : _controllerIdConnected) {
+            if (Mi->ControllerId == ControllerId) {
+                check = true;
+                break;
+            }
+        }
+        if (!check) {
+            _ControllerPos.push_back(Pos);
+        }
+        ++Pos;
+    }
+    for (const auto &i : _ControllerPos) {
+        _playersMappedInputs.erase(_playersMappedInputs.begin() + i);
+        --_controllerConnected;
+    }
+}
+
+void Inputs::InputManager::__updateConnectedController()
+{
+    _controllerIdConnected.clear();
+    _controllerIdConnected.push_back(-1);
+    for (unsigned int ControllerId = 0; ControllerId < sf::Joystick::Count; ++ControllerId) {
+        if (sf::Joystick::isConnected(ControllerId)) {
+            _controllerIdConnected.push_back(static_cast<char>(ControllerId));
+        }
+    }
+}
+
+void Inputs::InputManager::__updateContext()
+{
+    for (auto i = _playersMappedInputs.begin(); i != _playersMappedInputs.end(); ++i) {
+        if (i == _playersMappedInputs.begin()) {
+            (*i)->_axis = &_ContextToRaw.at(_activeContext)._mouse;
+        } else {
+            (*i)->_axis = &_ContextToRaw.at(_activeContext)._mouse;
+        }
+    }
+}
+
 
 /* End Event Handler */
 
-
-int Inputs::InputManager::__checkControllerQte() const
-{
-    unsigned int qte = 0;
-    for (unsigned int i = 0; i < sf::Joystick::Count; ++i) {
-        if (sf::Joystick::isConnected(i)) {
-            qte++;
-        }
-    }
-    return static_cast<int>(qte) - static_cast<int>(_controllerConnected);
-}
-
-void Inputs::InputManager::__handleJoystickChanges(int qte)
-{
-    std::cout << "Joystick Difference [" << qte << "]" << std::endl;
-    while (qte > 0) {
-        if (_controllerConnected + 1 <= _playerQte) {
-            std::cout << "Loading Controller" << std::endl;
-            __loadControler();
-            --qte;
-        } else {
-            break;
-        }
-
-
-    }
-    if (qte < 0) {
-        std::cout << "Removing Controller" << std::endl;
-        __handleDisconnectedJoystick();
-    }
-}
-
-void Inputs::InputManager::__handleDisconnectedJoystick()
-{
-    for (auto &i : _playersMappedInputs) {
-        if (i->ControllerId != -1 && !sf::Joystick::isConnected(i->ControllerId)) {
-            __disconnectJoystick(i->ControllerId);
-        }
-    }
-}
-
-void Inputs::InputManager::__disconnectJoystick(int JoystickId)
-{
-    for (auto i = _playersMappedInputs.begin(); i != _playersMappedInputs.end(); ++i) {
-        if ((*i)->ControllerId == JoystickId) {
-            _playersMappedInputs.erase(i);
-            break;
-        }
-    }
-    --_playerQte;
-    --_controllerConnected;
-}

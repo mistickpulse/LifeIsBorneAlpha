@@ -9,8 +9,8 @@
 
 struct Position
 {
-    int32_t x{0};
-    int32_t y{0};
+    double x{0};
+    double y{0};
 };
 
 #endif //LIFEISBORNE_POSITION_HPP
