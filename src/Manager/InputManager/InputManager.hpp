@@ -92,7 +92,9 @@ namespace Inputs
                                              RawInputAxis::LEFT_X,
                                              RawInputAxis::LEFT_Y,
                                              RawInputAxis::RIGHT_X,
-                                             RawInputAxis::RIGHT_Y
+                                             RawInputAxis::RIGHT_Y,
+                                             RawInputAxis::CROSS_X,
+                                             RawInputAxis::CROSS_Y
                                          },
                                          {
                                              RawInputAxis::MOUSE_X,

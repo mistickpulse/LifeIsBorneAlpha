@@ -18,7 +18,8 @@ namespace Scenes
                 Shop,
                 Game,
                 Lobby,
-                Intro
+                Intro,
+                TestScene
     )
 }
 

@@ -11,10 +11,10 @@ set(HDR_CORE src/core.hpp)
 ## Manager Sources
 ##InputManager Sources
 set(SRC_MANAGER_INPUT src/Manager/InputManager/InputManager.cpp src/Manager/InputManager/Context/InputContext.cpp src/Manager/InputManager/Context/InputContextManager.cpp)
-set(HDR_MANAGER_INPUT src/Manager/InputManager/InputManager.hpp src/Manager/InputManager/RawInputConstant.hpp src/Manager/InputManager/InputConstant.hpp src/Manager/InputManager/Context/InputContextManager.hpp src/Manager/InputManager/Context/ContextList.hpp src/Manager/InputManager/RangeConverter.hpp src/Manager/InputManager/Context/InputContext.hpp src/Manager/InputManager/BindingContextHelper.hpp src/Manager/InputManager/InputMapper.hpp src/Manager/InputManager/MappedInput.hpp src/Manager/InputManager/MappedInput.cpp)
+set(HDR_MANAGER_INPUT src/Manager/InputManager/InputManager.hpp src/Manager/InputManager/RawInputConstant.hpp src/Manager/InputManager/InputConstant.hpp src/Manager/InputManager/Context/InputContextManager.hpp src/Manager/InputManager/Context/ContextList.hpp src/Manager/InputManager/RangeConverter.hpp src/Manager/InputManager/Context/InputContext.hpp src/Manager/InputManager/BindingContextHelper.hpp src/Manager/InputManager/MappedInput.hpp src/Manager/InputManager/MappedInput.cpp)
 
-set(SRC_SCENE src/Scenes/Intro/IntroScene.cpp src/Scenes/SalleArcade/ArcadeScene.cpp src/Manager/SceneManager/ScenesManager.cpp)
-set(HDR_SCENE src/Manager/SceneManager/ScenesManager.hpp src/Scenes/SalleArcade/ArcadeScene.hpp src/Scenes/SalleArcade/TextureId.hpp)
+set(SRC_SCENE src/Scenes/Intro/IntroScene.cpp src/Scenes/SalleArcade/ArcadeScene.cpp src/Manager/SceneManager/ScenesManager.cpp src/Scenes/Test/TestScene.cpp)
+set(HDR_SCENE src/Manager/SceneManager/ScenesManager.hpp src/Scenes/SalleArcade/ArcadeScene.hpp src/Scenes/SalleArcade/TextureId.hpp src/Scenes/Test/TestScene.hpp)
 
 
 ### Entity Manager
@@ -37,10 +37,19 @@ set(HDR_MANAGER_RESSOURCE src/Manager/RessourceManager/RessourceManager.hpp)
 set(SRC_MANAGER ${SRC_MANAGER_INPUT} ${SRC_MANAGER_RESSOURCE} ${SRC_SCENE} ${SRC_MANAGER_EVENT} ${SRC_MANAGER_ETT})
 set(HDR_MANAGER ${HDR_MANAGER_INPUT} ${HDR_MANAGER_RESSOURCE} ${HDR_SCENE} ${HDR_MANAGER_EVENT} ${HDR_MANAGER_ETT})
 
+
+###### Dungeon Generation
+set(SRC_DUNGEON_GENERATION src/Dungeon/TestRoom.cpp)
+set(HDR_DUNGEON_GENERATION src/Dungeon/Dungeon.cpp src/Dungeon/Dungeon.hpp src/Dungeon/Cell.cpp src/Dungeon/Cell.hpp src/Dungeon/GenerationProfile.hpp src/Dungeon/RoomGenerationMode.hpp src/Dungeon/RoomPOD.hpp src/Dungeon/TestRoom.hpp)
+
+
+set(SRC_GENERATION ${SRC_DUNGEON_GENERATION})
+set(HDR_GENERATION ${HDR_DUNGEON_GENERATION})
+
 ## Set all Sources to SRC & HDR variable
 
-set(SRC ${SRC_CORE} ${SRC_MANAGER})
-set(HDR ${HDR_CORE} ${HDR_MANAGER} src/utils/Singleton.hpp src/Scenes/SceneList.hpp src/Manager/SceneManager/AScene.hpp src/Scenes/Intro/IntroScene.hpp src/Scenes/Intro/TextureId.hpp src/Scenes/ForwardScene.hpp src/utils/Position.hpp src/utils/Interval.hpp src/GlobalConf.hpp src/GameAction.hpp src/GameState.hpp src/GlobalConf.cpp src/PlayerMode.hpp)
+set(SRC ${SRC_CORE} ${SRC_MANAGER} ${SRC_GENERATION})
+set(HDR ${HDR_CORE} ${HDR_MANAGER} ${HDR_GENERATION} src/utils/Singleton.hpp src/Scenes/SceneList.hpp src/Manager/SceneManager/AScene.hpp src/Scenes/Intro/IntroScene.hpp src/Scenes/Intro/TextureId.hpp src/Scenes/ForwardScene.hpp src/utils/Position.hpp src/utils/Interval.hpp src/GlobalConf.hpp src/GameAction.hpp src/GameState.hpp src/GlobalConf.cpp src/PlayerMode.hpp)
 
 
 ## Setup cmake Moule paths

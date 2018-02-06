@@ -1,19 +1,18 @@
 //
-// Created by zouz on 28/01/18.
+// Created by zouz on 05/02/18.
 //
 
-#ifndef LIFEISBORNE_ARCADESCENE_HPP
-#define LIFEISBORNE_ARCADESCENE_HPP
+#ifndef LIFEISBORNE_TESTSCENE_HPP
+#define LIFEISBORNE_TESTSCENE_HPP
 
-#include <SFML/Graphics.hpp>
 #include "../../Manager/SceneManager/AScene.hpp"
-#include "../../Manager/RessourceManager/RessourceManager.hpp"
+#include "../../Dungeon/Dungeon.hpp"
 
-class ArcadeScene : public AScene
+class TestScene : public AScene
 {
 public:
-    explicit ArcadeScene(sf::RenderWindow &win);
-    ~ArcadeScene() final = default;
+    explicit TestScene(sf::RenderWindow &win);
+    ~TestScene() final = default;
 
 public:
     void enter() override;
@@ -33,10 +32,14 @@ private:
 private:
     void __loadTextures();
     void __loadSprites();
+
 private:
+
+    gen::GenerationProfile _profile;
+    gen::Dungeon _dungeon;
+    Inputs::InputManager &_iptMgr;
     sf::Time _timer;
-    RessourceManager<std::string, sf::Texture> _textures;
-    RessourceManager<std::string, sf::Sprite> _sprite;
+    int Iteration{200};
 };
 
-#endif //LIFEISBORNE_ARCADESCENE_HPP
+#endif //LIFEISBORNE_TESTSCENE_HPP

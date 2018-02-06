@@ -40,10 +40,7 @@ namespace Inputs
     public:
         InputContext *getActiveContext();
 
-        void compute(MappedInput &mi)
-        {
-            _ActiveContext->compute(mi);
-        }
+        void compute(MappedInput &mi);
 
 
     public: // Event Handler

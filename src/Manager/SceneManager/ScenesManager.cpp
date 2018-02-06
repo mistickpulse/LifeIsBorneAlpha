@@ -6,6 +6,7 @@
 #include "ScenesManager.hpp"
 #include "../../Scenes/SalleArcade/ArcadeScene.hpp"
 #include "../../Scenes/Intro/IntroScene.hpp"
+#include "../../Scenes/Test/TestScene.hpp"
 
 void SceneManager::receive(const Evt::ChangeScene &ev)
 {
@@ -83,5 +84,6 @@ void SceneManager::__registerAllScenes()
 {
     registerScenes<IntroScene>(Scenes::SceneType::Intro, new IntroScene(win));
     registerScenes<ArcadeScene>(Scenes::SceneType::SalleArcade, new ArcadeScene(win));
+    registerScenes<TestScene>(Scenes::SceneType::TestScene, new TestScene(win));
 }
 

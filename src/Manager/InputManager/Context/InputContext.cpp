@@ -101,7 +101,7 @@ void Inputs::InputContext::__computeKeyboard(MappedInput &mi)
         GameRange currentRange = _AxisMapping[i];
         RangeConvertedPackage &rangePckge = rc.getRangeConvertedPackage(currentRange);
         rangePckge.mappedInputs = &mi;
-        rangePckge.computeRange(rangePckge, mi.ControllerId);
+        rangePckge.computeRange(rangePckge, mi.ControllerId, i);
     }
 }
 
@@ -115,10 +115,10 @@ void Inputs::InputContext::__computeController(MappedInput &mi)
 
     RangeConverter &rc = RangeConverter::getInstance();
     for (const auto &i : *mi._axis) {
-        GameRange currentRange = _AxisMapping[i];
+        GameRange currentRange = _AxisMapping.at(i);
         RangeConvertedPackage &rangePckge = rc.getRangeConvertedPackage(currentRange);
         rangePckge.mappedInputs = &mi;
-        rangePckge.computeRange(rangePckge, mi.ControllerId);
+        rangePckge.computeRange(rangePckge, mi.ControllerId, i);
     }
 }
 

@@ -77,16 +77,16 @@ namespace Inputs
                  {"FREE", GameState::FREE},
              }};
 
-        std::unordered_map<GameRange, sf::Joystick::Axis> JoystickAxisConverter =
+        std::unordered_map<RawInputAxis, sf::Joystick::Axis> JoystickAxisConverter =
             {{
-                 {GameRange::BASIC_JOYSTICK_H, sf::Joystick::Axis::X},
-                 {GameRange::BASIC_JOYSTICK_V, sf::Joystick::Axis::Y},
+                 {RawInputAxis::LEFT_X, sf::Joystick::Axis::X},
+                 {RawInputAxis::LEFT_Y, sf::Joystick::Axis::Y},
 
-                 {GameRange::VIEWER_JOYSTICK_H, sf::Joystick::Axis::U},
-                 {GameRange::BASIC_MOUSE_H, sf::Joystick::Axis::V},
+                 {RawInputAxis::RIGHT_X, sf::Joystick::Axis::U},
+                 {RawInputAxis::RIGHT_Y, sf::Joystick::Axis::V},
 
-                 {GameRange::BASIC_CROSS_H, sf::Joystick::Axis::PovX},
-                 {GameRange::BASIC_CROSS_V, sf::Joystick::Axis::PovY},
+                 {RawInputAxis::CROSS_X, sf::Joystick::Axis::PovX},
+                 {RawInputAxis::CROSS_Y, sf::Joystick::Axis::PovY},
              }};
 
 
@@ -95,11 +95,15 @@ namespace Inputs
                  {"BASIC_MOUSE_H", GameRange::BASIC_MOUSE_H},
                  {"BASIC_MOUSE_V", GameRange::BASIC_MOUSE_V},
 
+                 {"BASIC_JOYSTICK_H", GameRange::BASIC_JOYSTICK_H},
+                 {"BASIC_JOYSTICK_V", GameRange::BASIC_JOYSTICK_V},
+
+                 {"BASIC_CROSS_H", GameRange::BASIC_CROSS_H},
+                 {"BASIC_CROSS_V", GameRange::BASIC_CROSS_V},
+
                  {"VIEWER_MOUSE_H", GameRange::VIEWER_MOUSE_H},
                  {"VIEWER_MOUSE_V", GameRange::VIEWER_MOUSE_V},
 
-                 {"BASIC_JOYSTICK_H", GameRange::BASIC_JOYSTICK_H},
-                 {"BASIC_JOYSTICK_V", GameRange::BASIC_JOYSTICK_V},
 
                  {"VIEWER_JOYSTICK_H", GameRange::VIEWER_JOYSTICK_H},
                  {"VIEWER_JOYSTICK_V", GameRange::VIEWER_JOYSTICK_V}

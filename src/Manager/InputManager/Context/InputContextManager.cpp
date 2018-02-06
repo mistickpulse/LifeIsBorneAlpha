@@ -54,3 +54,8 @@ void Inputs::InputContextManager::__subscribeEvent()
 
     evtMgr.subscribe<Evt::ChangeInputContext>(*this);
 }
+
+void Inputs::InputContextManager::compute(Inputs::MappedInput &mi)
+{
+    _ActiveContext->compute(mi);
+}

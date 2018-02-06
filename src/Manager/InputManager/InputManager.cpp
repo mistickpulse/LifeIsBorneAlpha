@@ -160,7 +160,7 @@ void Inputs::InputManager::__updateContext()
         if (i == _playersMappedInputs.begin()) {
             (*i)->_axis = &_ContextToRaw.at(_activeContext)._mouse;
         } else {
-            (*i)->_axis = &_ContextToRaw.at(_activeContext)._mouse;
+            (*i)->_axis = &_ContextToRaw.at(_activeContext)._controller;
         }
     }
 }

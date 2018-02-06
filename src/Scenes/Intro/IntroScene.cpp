@@ -9,7 +9,7 @@
 void IntroScene::enter()
 {
     _evtMgr.emit<Evt::ChangeInputContext>(Inputs::ContextList::Menu);
-    std::cout << "entering Scene" << std::endl;
+    std::cout << "entering Scene" << _name << std::endl;
     win.clear(sf::Color::Black);
     __load();
 }
@@ -38,6 +38,9 @@ void IntroScene::update(sf::Time &elapsedTime)
 {
     _timer += elapsedTime;
     draw();
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::T)) {
+        _evtMgr.emit<Evt::ChangeScene>(Scenes::SceneType::TestScene);
+    }
     if (_timer >= maxTimer) {
         _evtMgr.emit<Evt::ChangeScene>(Scenes::SceneType::SalleArcade);
     }
